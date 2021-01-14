@@ -147,7 +147,6 @@
           console.log('clicked');
           $('.ui.modal.signup').modal('show');
       });
-
     })
   ;
   </script>
@@ -159,9 +158,9 @@
 <div class="ui modal login"> <i class="close icon"></i>
     <div class="header">Login Modal Title</div>
     <div class="content">
-      <form method="POST" action = "{% url 'login' %}">
+      <form method="POST" action = "{% url 'home' %}">
           {% csrf_token %}
-          {{ form.as_p }}
+          {{ login_form.as_p }}
           <input type="submit" class="btn" value="login"/>
           <input type="hidden" name="next" value="{{ next }}"/>
       </form>    
@@ -178,7 +177,7 @@
     <div class="content">
       <form method="POST" action = "{% url 'home' %}">
           {% csrf_token %}
-          {{ form.as_p }}
+          {{ signup_form.as_p }}
           <input type="submit" class="btn" value="signup"/>
           <input type="hidden" name="next" value="{{ next }}"/>
       </form>   
@@ -189,6 +188,8 @@
         <input type="submit" value="submit" form="theform" class="ui button">
     </div>
 </div>
+
+
 
 
 {% comment %} ==== NAV CONTENT ==== {% endcomment %}
