@@ -10,7 +10,9 @@
   {% comment %} Semantic UI CSS {% endcomment %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/menu.min.css" integrity="sha512-ox96Q1iqhM5TvdY4gVbz6FXoDwsR/Q8jq15kWReQNefC+uUGCv+pkMbLOtr176K3+bfrQQv6gTDAvhL1PUw2YQ==" crossorigin="anonymous" />
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.css" integrity="sha512-CPLGe+O/BzgzHJKpdBXUuewmlxhlEfQ00zuYg1vcGCjOo88mqMeO1qa8q397ifxm18D12Go8OF7A42CjOKEl/g==" crossorigin="anonymous" />
+
+
   <style type="text/css">
 
     .hidden.menu {
@@ -101,9 +103,12 @@
 
   </style>
 
+  {% comment %} jQuery js {% endcomment %}
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  {% comment %} Semantic UI js {% endcomment %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.js" integrity="sha512-aAW/TaSuYfyjTcMsaYP67Dwe0vI5d7ej9X7NJBPkhafB+D5kx57flRNo8+tOXWA0Gcq0MBmhPatrvn1YwvH9gQ==" crossorigin="anonymous"></script>
 
   {% comment %} Sidebar js {% endcomment %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sidebar.min.js" integrity="sha512-1tmZBYaLOUohS48wc5egam1rTAIi71yvIpxj0FXHo6FskhgMF3LyCAdLvCFYi4e/L0GfH6BFtDBFD2wVa645Dg==" crossorigin="anonymous"></script>
@@ -133,6 +138,15 @@
         .sidebar('attach events', '.toc.item')
       ;
 
+      $("#login_modal").click(function () {
+          console.log('clicked');
+          $('.ui.modal.login').modal('show');
+      });
+
+      $("#signup_modal").click(function () {
+          console.log('clicked');
+          $('.ui.modal.signup').modal('show');
+      });
     })
   ;
   </script>
@@ -140,6 +154,45 @@
 
 <body class="pushable" data-new-gr-c-s-check-loaded="14.991.0" data-gr-ext-installed="" cz-shortcut-listen="true">
 
+{% comment %} ==== MODAL CONTENT ==== {% endcomment %}
+<div class="ui modal login"> <i class="close icon"></i>
+    <div class="header">Login Modal Title</div>
+    <div class="content">
+      <form method="POST" action = "{% url 'home' %}">
+          {% csrf_token %}
+          {{ login_form.as_p }}
+          <input type="submit" class="btn" value="login"/>
+          <input type="hidden" name="next" value="{{ next }}"/>
+      </form>    
+    </div>
+    <div class="actions">
+        <div class="ui button">Cancel</div>
+        <div class="ui button">OK</div>
+        <input type="submit" value="submit" form="theform" class="ui button">
+    </div>
+</div>
+
+<div class="ui modal signup"> <i class="close icon"></i>
+    <div class="header">Sign Up Modal Title</div>
+    <div class="content">
+      <form method="POST" action = "{% url 'home' %}">
+          {% csrf_token %}
+          {{ signup_form.as_p }}
+          <input type="submit" class="btn" value="signup"/>
+          <input type="hidden" name="next" value="{{ next }}"/>
+      </form>   
+    </div>
+    <div class="actions">
+        <div class="ui button">Cancel</div>
+        <div class="ui button">OK</div>
+        <input type="submit" value="submit" form="theform" class="ui button">
+    </div>
+</div>
+
+
+
+
+{% comment %} ==== NAV CONTENT ==== {% endcomment %}
 <!-- Following Menu -->
 <div class="ui large top fixed menu transition hidden">
   <div class="ui container">
@@ -177,12 +230,14 @@
         <a class="active item">Home</a>
         <a class="item">About</a>
         <div class="right item">
-          <a class="ui inverted button">Log in</a>
-          <a class="ui inverted button">Sign Up</a>
+          {% comment %} BUTTON {% endcomment %}
+          <a class="ui inverted button" id="login_modal">Log in</a>
+          <a class="ui inverted button" id="signup_modal">Sign Up</a>
         </div>
       </div>
     </div>
 
+{% comment %} ===== BLOCK CONTENT ===== {% endcomment %}
 {% block content %}
 {% endblock %}
 
