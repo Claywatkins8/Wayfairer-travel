@@ -1,8 +1,14 @@
-{% comment %} {% extends 'base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 
-<h1>Test<h1>
+<h1>Login</h1>
 
-{% endblock %} {% endcomment %}
+<form method="POST" action = "{% url 'login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn" value="login"/>
+    <input type="hidden" name="next" value="{{ next }}"/>
+</form>    
 
-<h1>test</h1>
+{% endblock %}
+
