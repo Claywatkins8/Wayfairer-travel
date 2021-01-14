@@ -1,9 +1,5 @@
-{% comment %} {% extends 'base.html' %}
+{% extends 'base.html' %}
 {% block content %}
-
-<h1>Test<h1>
-
-{% endblock %} {% endcomment %}
 
 <h1>Login</h1>
 
@@ -13,3 +9,6 @@
     <input type="submit" class="btn" value="login"/>
     <input type="hidden" name="next" value="{{ next }}"/>
 </form>    
+
+{% endblock %}
+
