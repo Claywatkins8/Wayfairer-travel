@@ -138,9 +138,10 @@
         .sidebar('attach events', '.toc.item')
       ;
 
-      $('.ui.modal')
-        .modal('show')
-      ;
+      $("#login_modal").click(function () {
+          console.log('clicked');
+          $('.ui.modal.login').modal('show');
+      });
 
     })
   ;
@@ -150,7 +151,17 @@
 <body class="pushable" data-new-gr-c-s-check-loaded="14.991.0" data-gr-ext-installed="" cz-shortcut-listen="true">
 
 {% comment %} ==== MODAL CONTENT ==== {% endcomment %}
+<div class="ui modal login"> <i class="close icon"></i>
+    <div class="header">Login Modal Title</div>
+    <div class="content">
 
+    </div>
+    <div class="actions">
+        <div class="ui button">Cancel</div>
+        <div class="ui button">OK</div>
+        <input type="submit" value="submit" form="theform" class="ui button">
+    </div>
+</div>
 
 
 {% comment %} ==== NAV CONTENT ==== {% endcomment %}
@@ -191,7 +202,8 @@
         <a class="active item">Home</a>
         <a class="item">About</a>
         <div class="right item">
-          <a class="ui inverted button">Log in</a>
+          {% comment %} BUTTON {% endcomment %}
+          <a class="ui inverted button" id="login_modal">Log in</a>
           <a class="ui inverted button">Sign Up</a>
         </div>
       </div>
