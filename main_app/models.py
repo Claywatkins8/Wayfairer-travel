@@ -15,6 +15,7 @@ class City(models.Model):
     country = models.CharField(max_length=100)
     # image = models.ImageField()
 
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField(max_length=1500)
