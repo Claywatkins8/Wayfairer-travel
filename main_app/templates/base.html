@@ -183,43 +183,8 @@
       </div>
     </div>
 
-    {% comment %} TODO: CAROUSEL GOES HERE {% endcomment %}
-    <div class="ui text container">
-      <h1 class="ui inverted header">
-        Imagine-a-CAROUSEL
-      </h1>
-      <h2>Do whatever you want when you want to.</h2>
-      <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
-    </div>
-
-  </div>
-
-
-  {% comment %} THIS IS WHERE COLUMNS GO REVIEW: Quote CSS styling? not needed?{% endcomment %}
-  <div class="ui vertical stripe quote segment">
-    <div class="ui equal width stackable internally celled grid">
-      <div class="center aligned row">
-
-        {% comment %} Column 1 {% endcomment %}
-        <div class="column">
-          <h3>"TOPIC"</h3>
-          <p>That is what they all say about us</p>
-        </div>
-
-        {% comment %} Column 2 {% endcomment %}
-        <div class="column">
-          {%block content %}
-          {% endblock %}
-        </div>
-
-        {% comment %} Column 3 {% endcomment %}
-        <div class="column">
-          <h3>"TOPIC"</h3>
-          <p>That is what they all say about us</p>
-        </div>
-      </div>
-    </div>
-  </div>
+{% block content %}
+{% endblock %}
 
 {% comment %} ==== FOOTER ==== {% endcomment %}
   <div class="ui inverted vertical footer segment">
