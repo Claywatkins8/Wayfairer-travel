@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/menu.min.css" integrity="sha512-ox96Q1iqhM5TvdY4gVbz6FXoDwsR/Q8jq15kWReQNefC+uUGCv+pkMbLOtr176K3+bfrQQv6gTDAvhL1PUw2YQ==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.css" integrity="sha512-CPLGe+O/BzgzHJKpdBXUuewmlxhlEfQ00zuYg1vcGCjOo88mqMeO1qa8q397ifxm18D12Go8OF7A42CjOKEl/g==" crossorigin="anonymous" />
 
-
   <style type="text/css">
 
     .hidden.menu {
@@ -102,6 +101,11 @@
 
 
   </style>
+  <link
+			rel="stylesheet"
+			type="text/css"
+			href="{% static 'css/style.css' %}"
+		/>
 
   {% comment %} jQuery js {% endcomment %}
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -220,9 +224,9 @@
 
 <!-- Page Contents -->
 <div class="pusher">
-  <div class="ui inverted vertical masthead center aligned segment">
+  <div id = "masthead" class="ui inverted vertical masthead center aligned segment">
 
-    <div class="ui container">
+    <div id="navbar" class="ui container">
       <div class="ui large secondary inverted pointing menu">
         <a class="toc item">
           <i class="sidebar icon"></i>
@@ -250,7 +254,7 @@
 {% endblock %}
 
 {% comment %} ==== FOOTER ==== {% endcomment %}
-  <div class="ui inverted vertical footer segment">
+  <div id="footer" class="ui inverted vertical footer segment">
     <div class="ui container">
       <div class="ui stackable inverted divided equal height stackable grid">
         <div class="three wide column">
