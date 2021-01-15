@@ -2,17 +2,57 @@
 {% block content %}
 
 {% comment %} TODO: CAROUSEL GOES HERE {% endcomment %}
-<div class="ui text container">
-  <h1 class="ui inverted header">
+
+  {% comment %} <h1 class="ui inverted header">
     Imagine-a-CAROUSEL
   </h1>
   {% if error_message %}
     <p class="red-text">{{error_message }}</p>
   {%endif%}
-  <h2>Do whatever you want when you want to.</h2>
-  <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
-</div>
+  <h2>Do whatever you want when you want to.</h2> {% endcomment %}
 
+<!-- Slider main container -->
+<div class="swiper-container">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide"><img src="static/resources/london-nightlife-1000x380.jpg" alt="london nightlife"></div>
+        <div class="swiper-slide"><img src="static/resources/san-francisco.jpg" alt="san fran nightlife"></div>
+        {% comment %} <div class="swiper-slide"><img src="static/resources/15665050049_14615cb9bf_o.jpg" alt="seattle nightlife"></div> {% endcomment %}
+        <div class="swiper-slide"><img src="static/resources/sydney nightlife.jpg" alt="sydney nightlife"></div>
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+
+  {% comment %} SWIPER INIT {% endcomment %}
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+</script>
+
+
+</div>
 </div>
 
 <h1 align="center" >Wayfarer is...</h1>
