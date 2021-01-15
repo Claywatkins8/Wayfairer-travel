@@ -22,13 +22,17 @@ def home(request):
             error_message = 'Invalid signup, please try again!'
     signup_form = UserCreationForm()
     login_form = AuthenticationForm()
-    context = {'signup_form': signup_form, 'error_message': error_message, 'login_form': login_form}
+    context = {'signup_form': signup_form,
+               'error_message': error_message, 'login_form': login_form}
     return render(request, 'home.html', context)
 
 
 def about(request):
     return render(request, 'about.html')
 
+
+def profile(request):
+    return render(request, 'profile.html')
 
 # REVIEW: Do not need page anymore? in modal?
 # def signup(request):
