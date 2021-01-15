@@ -69,4 +69,7 @@
   max-width: 800px;
   max-height: 100%;
 }
-.swiper-slide .swiper-slide-active;
+#carousel {
+  max-width: 100%;
+  object-fit: contain;
+}
