@@ -1,0 +1,29 @@
+/* CLIENT COLORS */
+/* 
+#05040A
+#592D3F
+#C62F2C
+#FDFDFD
+#1A195F
+#2D379F
+#B6ABB7
+#B7759F 
+ */
+
+#container-box {
+  margin: 50px 0px;
+}
+#left-box {
+  background-color: red;
+}
+#right-box {
+  background-color: green;
+}
+
+#navbar,
+#masthead,
+#footer {
+  background-color: #05040a;
+}
+
+/* SEMANTIC CSS */
