@@ -227,12 +227,16 @@
         <a class="toc item">
           <i class="sidebar icon"></i>
         </a>
-        <a class="active item">Home</a>
-        <a class="item">About</a>
+        <a href="/" class="active item">Home</a>
+        <a href="about" class="item">About</a>
         <div class="right item">
-          {% comment %} BUTTON {% endcomment %}
-          <a class="ui inverted button" id="login_modal">Log in</a>
-          <a class="ui inverted button" id="signup_modal">Sign Up</a>
+          {% comment %} MAIN NAV LINKS {% endcomment %}
+          {% if user.is_authenticated %}
+            <a class="ui inverted button" href="{% url 'logout' %}">Log Out</a>
+          {% else %}
+            <a class="ui inverted button" id="login_modal">Log in</a>
+            <a class="ui inverted button" id="signup_modal">Sign Up</a>
+          {% endif %}
         </div>
       </div>
     </div>
