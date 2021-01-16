@@ -19,7 +19,7 @@ def home(request):
         if signup_form.is_valid():
             user = signup_form.save()
             login(request, user)
-            return redirect('about/')
+            return redirect('profile/')
             # We are going to return redirect to home but will change this later
         else:
             error_message = 'Invalid signup, please try again!'
