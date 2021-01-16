@@ -28,10 +28,15 @@
     class="nine wide computer nine wide tablet six wide mobile column"
   >
     <h3 class="ui center aligned header">Posts</h3>
-
-    <div class="ui segment">POSTS</div>
-    <div class="ui segment">POSTS</div>
-    <div class="ui segment">POSTS</div>
+    {% for post in posts %}
+      <div class="ui segment">
+        <a href="{% url 'post_show' post_id=post.id %}">
+          {{ post.title }}
+          {{ post.content }}
+        </a>
+      </div>
+    {% endfor %}
+    <a href="{% url 'post_create' %}">Add Post</a>
   </div>
 </div>
 
