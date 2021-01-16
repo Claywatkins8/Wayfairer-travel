@@ -155,14 +155,10 @@
           $('.ui.modal.login').modal('show');
       });
 
-      $(function(){
-	$("#hide_modal").click(function(){
-		$(".test").modal('show');
-	});
-	$(".test").modal({
-		closable: true
-	});
-});
+      $("#hide_modal").click(function () {
+          console.log('clicked');
+          $('.ui.modal.login').modal('hide');
+      });
 
       $("#signup_modal").click(function () {
           console.log('clicked');
