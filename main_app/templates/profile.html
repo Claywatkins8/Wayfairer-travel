@@ -5,14 +5,17 @@
     id="left-box"
     class="four wide computer three wide tablet six wide mobile column"
   >
-    <h3 class="ui center aligned header">Name</h3>
+    <h3 class="ui center aligned header">{{ user.first_name}} {{user.last_name}}</h3>
     <div class="ui segment">
         <p>Username: {{ user.username }}</p>
         <p>Date Joined: {{ user.date_joined }}</p>
+        <p>First Name: {{ user.first_name }}</p>
+        <p> Last Name: {{ user.last_name }}</p>
+        <p> Email: {{ user.email }}</p>
         <p>Current City: {{ profile.current_city }}</p>
+
     </div>
-    <div class="ui segment">Content</div>
-    <div class="ui segment">Content</div>
+    
     <form action="{% url 'profile' %}" method="POST">
       {% csrf_token %}
       {{profile_form.as_p}}
