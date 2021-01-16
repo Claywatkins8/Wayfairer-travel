@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 
 from .models import Profile, User 
-from .forms import Profile_Form
+from .forms import Profile_Form, NewUserForm
 # Once we have routes that need locking we can put in @login_required
 
 # Define the home view
@@ -15,18 +15,19 @@ from .forms import Profile_Form
 def home(request):
     error_message = ''
     if request.method == 'POST':
-        signup_form = UserCreationForm(request.POST)
+        signup_form = NewUserForm(request.POST)
         if signup_form.is_valid():
             user = signup_form.save()
             login(request, user)
-            # We are going to return redirect to home but will change this later
             return redirect('about/')
+            # We are going to return redirect to home but will change this later
         else:
             error_message = 'Invalid signup, please try again!'
-    signup_form = UserCreationForm()
+            
+    signup_form = NewUserForm()
     login_form = AuthenticationForm()
     context = {'signup_form': signup_form,
-               'error_message': error_message, 'login_form': login_form}
+               'error_message': error_message, 'login_form': login_form,}
     return render(request, 'home.html', context)
 
 
@@ -46,7 +47,10 @@ def profile(request):
             return redirect('profile')
 
     user = User.objects.get(id = request.user.id) 
-    profile = Profile.objects.get(user_id = request.user.id)
+    if Profile.objects.filter(user_id = request.user.id):
+        profile = Profile.objects.get(user_id = request.user.id)
+    else:
+        profile = ""
     profile_form = Profile_Form()
     context = {'profile': profile, 'profile_form': profile_form, 'user': user}
     return render(request, 'profile.html', context)
