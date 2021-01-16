@@ -5,8 +5,8 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 
-from .models import Profile, User 
-from .forms import Profile_Form, NewUserForm
+from .models import Profile, User, Post, City 
+from .forms import Profile_Form, NewUserForm, Post_Form
 # Once we have routes that need locking we can put in @login_required
 
 # Define the home view
@@ -52,8 +52,30 @@ def profile(request):
     else:
         profile = ""
     profile_form = Profile_Form()
-    context = {'profile': profile, 'profile_form': profile_form, 'user': user}
+    posts = Post.objects.filter(user=request.user)
+    context = {'profile': profile, 'profile_form': profile_form, 'user': user, 'posts': posts}
     return render(request, 'profile.html', context)
+
+def post_create(request):
+    if request.method == 'POST':
+        post_form = Post_Form(request.POST)
+        if post_form.is_valid():
+            new_post = post_form.save(commit=False)
+            new_post.user = request.user
+            new_post.city_id = 1 #write a query that will pull the current city from profile
+            new_post.save()
+            return redirect('profile')
+    
+    post_form = Post_Form()
+    context = {'post_form': post_form, }
+    return render(request, 'posts/create.html', context)
+
+def post_show(request, post_id):
+    post = Post.objects.get(id=post_id)
+    context = {'post': post}
+    return render(request, 'posts/show.html', context)
+
+
 
 # REVIEW: Do not need page anymore? in modal?
 # def signup(request):
