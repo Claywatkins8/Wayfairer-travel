@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+
+from .models import Profile, User 
+from .forms import Profile_Form
 # Once we have routes that need locking we can put in @login_required
 
 # Define the home view
@@ -32,7 +35,21 @@ def about(request):
 
 
 def profile(request):
-    return render(request, 'profile.html')
+    
+    if request.method == 'POST':
+        profile_form = Profile_Form(request.POST)
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+            print(profile_form)
+            profile.save()
+            return redirect('profile')
+
+    user = User.objects.get(id = request.user.id) 
+    profile = Profile.objects.get(user_id = request.user.id)
+    profile_form = Profile_Form()
+    context = {'profile': profile, 'profile_form': profile_form, 'user': user}
+    return render(request, 'profile.html', context)
 
 # REVIEW: Do not need page anymore? in modal?
 # def signup(request):

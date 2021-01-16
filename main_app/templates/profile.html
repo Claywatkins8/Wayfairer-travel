@@ -5,10 +5,19 @@
     id="left-box"
     class="four wide computer three wide tablet six wide mobile column"
   >
-    <h3 class="ui center aligned header"></h3>
+    <h3 class="ui center aligned header">Name</h3>
+    <div class="ui segment">
+        <p>Username: {{ user.username }}</p>
+        <p>Date Joined: {{ user.date_joined }}</p>
+        <p>Current City: {{ profile.current_city }}</p>
+    </div>
     <div class="ui segment">Content</div>
     <div class="ui segment">Content</div>
-    <div class="ui segment">Content</div>
+    <form action="{% url 'profile' %}" method="POST">
+      {% csrf_token %}
+      {{profile_form.as_p}}
+      <input class='ui inverted button' type="submit" value='Add Info'>
+    </form>
   </div>
 
   <div
