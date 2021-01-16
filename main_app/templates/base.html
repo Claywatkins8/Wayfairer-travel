@@ -155,6 +155,11 @@
           $('.ui.modal.login').modal('show');
       });
 
+      $("#hide_modal").click(function () {
+          console.log('clicked');
+          $('.ui.modal.login').modal('hide');
+      });
+
       $("#signup_modal").click(function () {
           console.log('clicked');
           $('.ui.modal.signup').modal('show');
@@ -175,14 +180,14 @@
       <form method="POST" action = "{% url 'home' %}">
           {% csrf_token %}
           {{ login_form.as_p }}
-          <input type="submit" class="btn" value="login"/>
+          <input type="submit" class="ui inverted button" value="login"/>
           <input type="hidden" name="next" value="{{ next }}"/>
       </form>    
     </div>
     <div class="actions">
         <div class="ui button">Cancel</div>
         <div class="ui button">OK</div>
-        <input type="submit" value="submit" form="theform" class="ui button">
+        <input type="submit" value="submit" form="theform" class="ui inverted button">
     </div>
 </div>
 
@@ -192,14 +197,11 @@
       <form method="POST" action = "{% url 'home' %}">
           {% csrf_token %}
           {{ signup_form.as_p }}
-          <input type="submit" class="btn" value="signup"/>
+          <input type="submit" class="ui inverted button" value="Sign Up"/>
+          {% comment %} REVIEW: Cancel button to close modal/redirect to SAME page {% endcomment %}
+          <div class="ui button" id="hide_modal">Cancel</div>
           <input type="hidden" name="next" value="{{ next }}"/>
       </form>   
-    </div>
-    <div class="actions">
-        <div class="ui button">Cancel</div>
-        <div class="ui button">OK</div>
-        <input type="submit" value="submit" form="theform" class="ui button">
     </div>
 </div>
 
