@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<p> This is a test sentence.</p>
+
+<p>Title: {{ post.title }}</p>
+<p>Content: {{ post.content }}</p>
+
+<a href="{% url 'post_edit' post_id=post.id %}">Edit</a>
+<a href="{% url 'post_delete' post_id=post.id %}">Delete</a>
+
 {% endblock %}
