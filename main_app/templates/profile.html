@@ -10,14 +10,18 @@
         <p>Date Joined: {{ user.date_joined }}</p>
         <p> Email: {{ user.email }}</p>
         <p>Current City: {{ profile.current_city }}</p>
-
+        {% if profile != "" %}
+          <a href="{% url 'profile_edit' %}">Edit Profile</a>
+        {% endif %}
     </div>
     
-    <form action="{% url 'profile' %}" method="POST">
-      {% csrf_token %}
-      {{profile_form.as_p}}
-      <input class='ui inverted button' type="submit" value='Add Info'>
-    </form>
+    {% if profile == "" %}
+      <form action="{% url 'profile' %}" method="POST">
+        {% csrf_token %}
+        {{profile_form.as_p}}
+        <input class='ui inverted button' type="submit" value='Add Current City'>
+      </form>
+    {% endif %}
   </div>
 
   <div

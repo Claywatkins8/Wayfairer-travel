@@ -54,6 +54,18 @@ def profile(request):
     context = {'profile': profile, 'profile_form': profile_form, 'user': user, 'posts': posts}
     return render(request, 'profile.html', context)
 
+def profile_edit(request):
+    profile = Profile.objects.get(user_id = request.user.id)
+    if request.method == 'POST':
+        profile_form = Profile_Form(request.POST, instance=profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            return redirect('profile')
+
+    profile_form = Profile_Form(instance=profile)
+    context = {'profile_form': profile_form, 'profile': profile}
+    return render(request, 'profiles/edit.html', context)
+
 def post_create(request):
     if request.method == 'POST':
         post_form = Post_Form(request.POST)
