@@ -8,13 +8,18 @@
 #B6ABB7 - grey
 
  */
+/* .pusher {
+  height: 100%;
+  background-color: #05040a !important;
+}
+#topics {
+  background-color: #fdfdfd;
+  margin-bottom: 1px;
+  padding: 10px 0px;
+} */
 
 #container-box {
   margin: 50px 0px;
-}
-#left-box {
-}
-#right-box {
 }
 
 #navbar,
@@ -36,6 +41,13 @@
 }
 .ui.inverted.segment .segment {
   color: #b6abb7;
+}
+
+#footer {
+  /* Increased specificity for SO snippet priority */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 /* SWIPER CSS */
