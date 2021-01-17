@@ -7,20 +7,21 @@
   >
     <h3 class="ui center aligned header">{{ user.first_name}} {{user.last_name}}</h3>
     <div class="ui segment">
-        <p>Username: {{ user.username }}</p>
         <p>Date Joined: {{ user.date_joined }}</p>
-        <p>First Name: {{ user.first_name }}</p>
-        <p> Last Name: {{ user.last_name }}</p>
         <p> Email: {{ user.email }}</p>
         <p>Current City: {{ profile.current_city }}</p>
-
+        {% if profile != "" %}
+          <a href="{% url 'profile_edit' %}">Edit Profile</a>
+        {% endif %}
     </div>
     
-    <form action="{% url 'profile' %}" method="POST">
-      {% csrf_token %}
-      {{profile_form.as_p}}
-      <input class='ui inverted button' type="submit" value='Add Info'>
-    </form>
+    {% if profile == "" %}
+      <form action="{% url 'profile' %}" method="POST">
+        {% csrf_token %}
+        {{profile_form.as_p}}
+        <input class='ui inverted button' type="submit" value='Add Current City'>
+      </form>
+    {% endif %}
   </div>
 
   <div
@@ -30,10 +31,9 @@
     <h3 class="ui center aligned header">Posts</h3>
     {% for post in posts %}
       <div class="ui segment">
-        <a href="{% url 'post_show' post_id=post.id %}">
-          {{ post.title }}
-          {{ post.content }}
-        </a>
+          <a href="{% url 'post_show' post_id=post.id %}">
+            <p>{{ post.title }}</p>
+          </a>
       </div>
     {% endfor %}
     <a href="{% url 'post_create' %}">Add Post</a>
