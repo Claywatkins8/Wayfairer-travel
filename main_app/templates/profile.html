@@ -30,10 +30,9 @@
     <h3 class="ui center aligned header">Posts</h3>
     {% for post in posts %}
       <div class="ui segment">
-        <a href="{% url 'post_show' post_id=post.id %}">
-          {{ post.title }}
-          {{ post.content }}
-        </a>
+          <p>{{ post.title }}</p>
+          <p>{{ post.content }}</p>
+          <a href="{% url 'post_edit' post_id=post.id %}">Edit</a>
       </div>
     {% endfor %}
     <a href="{% url 'post_create' %}">Add Post</a>

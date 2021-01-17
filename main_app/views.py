@@ -70,10 +70,17 @@ def post_create(request):
     context = {'post_form': post_form, }
     return render(request, 'posts/create.html', context)
 
-def post_show(request, post_id):
+def post_edit(request, post_id):
     post = Post.objects.get(id=post_id)
-    context = {'post': post}
-    return render(request, 'posts/show.html', context)
+    if request.method == 'POST':
+        post_form = Post_Form(request.POST, instance=post)
+        if post_form.is_valid():
+            post_form.save()
+            return redirect('profile')
+
+    post_form = Post_Form(instance=post)
+    context = {'post_form': post_form, 'post': post}
+    return render(request, 'posts/edit.html', context)
 
 
 
