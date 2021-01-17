@@ -7,6 +7,20 @@
   >
     <h3 class="ui center aligned header">{{ user.first_name}} {{user.last_name}}</h3>
     <div class="ui segment">
+    {% comment %} PHOTO {% endcomment %}
+        {% for photo in profile.photo_set.all %}
+      <img class="" src="{{photo.url}}">
+    {% empty %}
+      <div class="">No Photos Uploaded</div>
+      {% comment %} PHOTO FORM {% endcomment %}
+      <form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <input type="file" name="photo-file">
+    <br><br>
+    <input type="submit" class="btn" value="Upload Photo">
+</form>
+    {% endfor %}
+    {% comment %} User info {% endcomment %}
         <p>Date Joined: {{ user.date_joined }}</p>
         <p> Email: {{ user.email }}</p>
         <p>Current City: {{ profile.current_city }}</p>
@@ -39,5 +53,7 @@
     <a href="{% url 'post_create' %}">Add Post</a>
   </div>
 </div>
+
+   </div>
 
 {% endblock %}
