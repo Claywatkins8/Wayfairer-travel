@@ -74,10 +74,25 @@
   object-fit: contain;
 }
 
+/* LOGO ICON */
 .fab {
-  color: red;
+  color: #c62f2c;
   font-size: 50px;
 }
+#logo-nav {
+  padding-right: 15px;
+}
+#logo-nav:hover {
+  color: #fdfdfd;
+}
+#logo-follow {
+  padding-right: 15px;
+}
+#logo-follow:hover {
+  color: #b6abb7;
+}
+
+/* PROFILE IMAGE */
 .profile-img {
   max-width: 100%;
   padding-bottom: 50px;

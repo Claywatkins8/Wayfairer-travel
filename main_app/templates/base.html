@@ -214,21 +214,25 @@
 <!-- Following Menu -->
 <div class="ui large top fixed menu transition hidden">
   <div class="ui container">
-
-    
-    <i class="fab fa-weebly"></i>
+    <a href="/" id="logo-follow" class="fab fa-weebly"></a>
     
 
-    <a class="active item">Home</a>
-    <a class="item">About</a>
-    <div class="right menu">
-      <div class="item">
-        <a class="ui button">Log in</a>
-      </div>
-      <div class="item">
-        <a class="ui primary button">Sign Up</a>
-      </div>
-    </div>
+        <a href="/" class="active item">Home</a>
+        <a href="/about" class="item">About</a>
+        {% comment %} Left side nave if logged in {% endcomment %}
+          {% if user.is_authenticated %}
+            <a href="/profile" class="item">Profile</a>
+          {% endif %}
+        <div class="right item">
+          {% comment %} MAIN NAV LINKS {% endcomment %}
+          {% if user.is_authenticated %}
+            <a class="ui inverted button" href="{% url 'logout' %}">Log Out</a>
+          {% else %}
+            <a class="ui inverted button" id="login_modal">Log in</a>
+            <a class="ui inverted button" id="signup_modal">Sign Up</a>
+          {% endif %}
+        </div>
+    
   </div>
 </div>
 
@@ -258,7 +262,7 @@
         <a class="toc item">
           <i class="sidebar icon"></i>
         </a>
-        <i class="fab fa-weebly"></i>
+        <a href="/" class="fab fa-weebly" id="logo-nav"></a>
         <a href="/" class="active item">Home</a>
         <a href="/about" class="item">About</a>
         {% comment %} Left side nave if logged in {% endcomment %}
