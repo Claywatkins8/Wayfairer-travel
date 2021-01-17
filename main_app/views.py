@@ -20,7 +20,6 @@ def home(request):
             user = signup_form.save()
             login(request, user)
             return redirect('profile/')
-            # We are going to return redirect to home but will change this later
         else:
             error_message = 'Invalid signup, please try again!'
             
@@ -36,7 +35,6 @@ def about(request):
 
 
 def profile(request):
-    
     if request.method == 'POST':
         profile_form = Profile_Form(request.POST)
         if profile_form.is_valid():
@@ -70,17 +68,26 @@ def post_create(request):
     context = {'post_form': post_form, }
     return render(request, 'posts/create.html', context)
 
+def post_show(request, post_id):
+    post = Post.objects.get(id=post_id)
+    context = {'post': post}
+    return render(request, 'posts/show.html', context)
+
 def post_edit(request, post_id):
     post = Post.objects.get(id=post_id)
     if request.method == 'POST':
         post_form = Post_Form(request.POST, instance=post)
         if post_form.is_valid():
             post_form.save()
-            return redirect('profile')
+            return redirect('post_show', post_id=post.id)
 
     post_form = Post_Form(instance=post)
     context = {'post_form': post_form, 'post': post}
     return render(request, 'posts/edit.html', context)
+
+def post_delete(request, post_id):
+    Post.objects.get(id = post_id).delete()
+    return redirect('profile')
 
 
 
