@@ -140,6 +140,10 @@ def add_photo(request, profile_id):
     return redirect('profile')
 
 
+def photo_delete(request, photo_id):
+    Photo.objects.get(id=photo_id).delete()
+    return redirect('profile')
+
 # REVIEW: Do not need page anymore? in modal?
 # def signup(request):
 #     error_message = ''

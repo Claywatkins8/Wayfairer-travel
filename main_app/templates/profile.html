@@ -10,6 +10,7 @@
     {% comment %} PHOTO {% endcomment %}
         {% for photo in profile.photo_set.all %}
       <img class="profile-img" src="{{photo.url}}">
+      <a href="{% url 'photo_delete' photo_id=photo.id %}">Delete</a>
     {% empty %}
       <div class="">No Photos Uploaded</div>
       {% comment %} PHOTO FORM {% endcomment %}
