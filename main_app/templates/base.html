@@ -177,7 +177,7 @@
 <div class="ui modal login"> <i class="close icon"></i>
     <div class="header">Login Modal Title</div>
     <div class="content">
-      <form method="POST" action = "{% url 'home' %}">
+      <form method="POST" action = "{% url 'login' %}">
           {% csrf_token %}
           {{ login_form.as_p }}
           <input type="submit" class="ui inverted button" value="login"/>
