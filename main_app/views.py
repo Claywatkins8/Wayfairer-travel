@@ -26,7 +26,7 @@ def home(request):
     signup_form = NewUserForm()
     login_form = AuthenticationForm()
     context = {'signup_form': signup_form,
-               'error_message': error_message, 'login_form': login_form,}
+               'error_message': error_message, 'login_form': login_form}
     return render(request, 'home.html', context)
 
 
@@ -56,6 +56,7 @@ def profile(request):
 
 def profile_edit(request):
     profile = Profile.objects.get(user_id = request.user.id)
+    user = User.objects.get(id = request.user.id)
     if request.method == 'POST':
         profile_form = Profile_Form(request.POST, instance=profile)
         if profile_form.is_valid():
@@ -63,7 +64,8 @@ def profile_edit(request):
             return redirect('profile')
 
     profile_form = Profile_Form(instance=profile)
-    context = {'profile_form': profile_form, 'profile': profile}
+    user_form = NewUserForm(instance=user)
+    context = {'profile_form': profile_form, 'profile': profile, 'user_form': user_form, 'user': user}
     return render(request, 'profiles/edit.html', context)
 
 def post_create(request):
