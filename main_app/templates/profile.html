@@ -9,7 +9,7 @@
     <div class="ui segment">
     {% comment %} PHOTO {% endcomment %}
         {% for photo in profile.photo_set.all %}
-      <img class="" src="{{photo.url}}">
+      <img class="profile-img" src="{{photo.url}}">
     {% empty %}
       <div class="">No Photos Uploaded</div>
       {% comment %} PHOTO FORM {% endcomment %}

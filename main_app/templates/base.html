@@ -234,10 +234,18 @@
 
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu left">
-  <a class="active item">Home</a>
-  <a class="item">About</a>
-  <a class="item">Login</a>
-  <a class="item">Signup</a>
+  <a href="/" class="active item">Home</a>
+  <a href="/about" class="item">About</a>
+{% if user.is_authenticated %}
+            <a href="/profile" class="item">Profile</a>
+          {% endif %}
+          {% comment %} MAIN NAV LINKS {% endcomment %}
+          {% if user.is_authenticated %}
+            <a class="item" href="{% url 'logout' %}">Log Out</a>
+          {% else %}
+            <a class="item">Log in</a>
+            <a class="item">Sign Up</a>
+          {% endif %}
 </div>
 
 
