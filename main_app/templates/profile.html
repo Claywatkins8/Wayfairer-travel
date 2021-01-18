@@ -12,7 +12,8 @@
       <img class="profile-img" src="{{photo.url}}">
       <a href="{% url 'photo_delete' photo_id=photo.id %}">Delete</a>
       {% empty %}
-      <div class="">No Photos Uploaded</div>
+      <img class="profile-img" src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png">
+      {% comment %} <div class="">No Photos Uploaded</div> {% endcomment %}
 
 
       {% comment %} PHOTO FORM {% endcomment %}
@@ -25,7 +26,7 @@
       </form>
       {% endfor %}
 
-      
+
       {% comment %} User info {% endcomment %}
       <p>Date Joined: {{ user.date_joined }}</p>
       <p> Email: {{ user.email }}</p>
