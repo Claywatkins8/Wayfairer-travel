@@ -95,7 +95,12 @@ def post_create(request):
 
 def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
-    context = {'post': post}
+    user = User.objects.get(id=post.user_id)
+    # if Profile.objects.filter(user_id=request.user.id):
+        # profile = Profile.objects.get(user_id=request.user.id)
+
+
+    context = {'post': post, 'user':user }
     return render(request, 'posts/show.html', context)
 
 

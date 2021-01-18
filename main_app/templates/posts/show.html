@@ -2,6 +2,7 @@
 {% block content %}
 
 <p>Title: {{ post.title }}</p>
+<p>Author: {{ user.username }}</p>
 <p>Content: {{ post.content }}</p>
 
 <a href="{% url 'post_edit' post_id=post.id %}">Edit</a>
