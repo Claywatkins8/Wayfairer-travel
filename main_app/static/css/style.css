@@ -14,8 +14,13 @@
 
 #navbar,
 #masthead,
-#footer {
+#footer,
+.ui.menu.fixed {
   background-color: #05040a;
+}
+
+.ui.menu.fixed {
+  background-color: #05040a !important;
 }
 
 .ui.center.aligned.header {

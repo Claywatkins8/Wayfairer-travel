@@ -168,6 +168,7 @@
     <script>
       $(document).ready(function () {
         // fix menu when passed
+        /*
         $(".masthead").visibility({
           once: false,
           onBottomPassed: function () {
@@ -177,6 +178,7 @@
             $(".fixed.menu").transition("fade out");
           },
         });
+        */
 
         // create sidebar and attach to menu open
         $(".ui.sidebar").sidebar("attach events", ".toc.item");
@@ -325,6 +327,7 @@
 
 {% comment %} ==== NAV CONTENT ==== {% endcomment %}
 <!-- Following Menu -->
+{% comment %} 
 <div class="ui large top fixed menu transition hidden">
   <div class="ui container">
     <a class="active item">Home</a>
@@ -338,7 +341,8 @@
       </div>
     </div>
   </div>
-</div>
+</div> 
+{% endcomment %}
 
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu left">
@@ -348,7 +352,7 @@
   <a class="item">Signup</a>
 </div>
 
-    <!-- Sidebar Menu -->
+    <!-- Sidebar NAV Menu -->
     <div class="ui vertical inverted sidebar menu left">
       <a href="/" class="active item">Home</a>
       <a href="/about" class="item">About</a>
@@ -358,14 +362,14 @@
       {% endif %}
     </div>
 
-    <!-- Page Contents -->
+    <!-- MAIN NAV MENU Contents -->
     <div class="pusher">
       <div
         id="masthead"
         class="ui inverted vertical masthead center aligned segment"
       >
         <div id="navbar" class="ui container">
-          <div class="ui large secondary inverted pointing menu">
+          <div class="ui large secondary inverted pointing fixed menu">
             <a class="toc item">
               <i class="sidebar icon"></i>
             </a>
