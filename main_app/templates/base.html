@@ -1,181 +1,212 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wayfarer</title>
+    {% comment %} Font Awesome W Icon
+    https://fontawesome.com/icons/weebly?style=brands {% endcomment %}
+    <script
+      src="https://kit.fontawesome.com/6f4b5c5a8a.js"
+      crossorigin="anonymous"
+    ></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wayfarer</title>
-  {% comment %} Font Awesome W Icon https://fontawesome.com/icons/weebly?style=brands {% endcomment %}
-  <script src="https://kit.fontawesome.com/6f4b5c5a8a.js" crossorigin="anonymous"></script>
+    {% comment %} Semantic UI CSS {% endcomment %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/menu.min.css"
+      integrity="sha512-ox96Q1iqhM5TvdY4gVbz6FXoDwsR/Q8jq15kWReQNefC+uUGCv+pkMbLOtr176K3+bfrQQv6gTDAvhL1PUw2YQ=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.css"
+      integrity="sha512-CPLGe+O/BzgzHJKpdBXUuewmlxhlEfQ00zuYg1vcGCjOo88mqMeO1qa8q397ifxm18D12Go8OF7A42CjOKEl/g=="
+      crossorigin="anonymous"
+    />
 
-  {% comment %} Semantic UI CSS {% endcomment %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/menu.min.css" integrity="sha512-ox96Q1iqhM5TvdY4gVbz6FXoDwsR/Q8jq15kWReQNefC+uUGCv+pkMbLOtr176K3+bfrQQv6gTDAvhL1PUw2YQ==" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.css" integrity="sha512-CPLGe+O/BzgzHJKpdBXUuewmlxhlEfQ00zuYg1vcGCjOo88mqMeO1qa8q397ifxm18D12Go8OF7A42CjOKEl/g==" crossorigin="anonymous" />
+    {% comment %} SWIPER CDN {% endcomment %}
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
 
-{% comment %} SWIPER CDN {% endcomment %}
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-
-  <style type="text/css">
-
-    .hidden.menu {
-      display: none;
-    }
-
-    .masthead.segment {
-      min-height: 700px;
-      padding: 1em 0em;
-    }
-    .masthead .logo.item img {
-      margin-right: 1em;
-    }
-    .masthead .ui.menu .ui.button {
-      margin-left: 0.5em;
-    }
-    .masthead h1.ui.header {
-      margin-top: 3em;
-      margin-bottom: 0em;
-      font-size: 4em;
-      font-weight: normal;
-    }
-    .masthead h2 {
-      font-size: 1.7em;
-      font-weight: normal;
-    }
-
-    .ui.vertical.stripe {
-      padding: 8em 0em;
-    }
-    .ui.vertical.stripe h3 {
-      font-size: 2em;
-    }
-    .ui.vertical.stripe .button + h3,
-    .ui.vertical.stripe p + h3 {
-      margin-top: 3em;
-    }
-    .ui.vertical.stripe .floated.image {
-      clear: both;
-    }
-    .ui.vertical.stripe p {
-      font-size: 1.33em;
-    }
-    .ui.vertical.stripe .horizontal.divider {
-      margin: 3em 0em;
-    }
-
-    .quote.stripe.segment {
-      padding: 0em;
-    }
-    .quote.stripe.segment .grid .column {
-      padding-top: 5em;
-      padding-bottom: 5em;
-    }
-
-    .footer.segment {
-      padding: 5em 0em;
-    }
-
-    .secondary.pointing.menu .toc.item {
-      display: none;
-    }
-
-    @media only screen and (max-width: 700px) {
-      .ui.fixed.menu {
-        display: none !important;
-      }
-      .secondary.pointing.menu .item,
-      .secondary.pointing.menu .menu {
+    <style type="text/css">
+      .hidden.menu {
         display: none;
       }
-      .secondary.pointing.menu .toc.item {
-        display: block;
-      }
+
       .masthead.segment {
-        min-height: 350px;
+        min-height: 700px;
+        padding: 1em 0em;
+      }
+      .masthead .logo.item img {
+        margin-right: 1em;
+      }
+      .masthead .ui.menu .ui.button {
+        margin-left: 0.5em;
       }
       .masthead h1.ui.header {
-        font-size: 2em;
-        margin-top: 1.5em;
+        margin-top: 3em;
+        margin-bottom: 0em;
+        font-size: 4em;
+        font-weight: normal;
       }
       .masthead h2 {
-        margin-top: 0.5em;
-        font-size: 1.5em;
+        font-size: 1.7em;
+        font-weight: normal;
       }
-    }
 
+      .ui.vertical.stripe {
+        padding: 8em 0em;
+      }
+      .ui.vertical.stripe h3 {
+        font-size: 2em;
+      }
+      .ui.vertical.stripe .button + h3,
+      .ui.vertical.stripe p + h3 {
+        margin-top: 3em;
+      }
+      .ui.vertical.stripe .floated.image {
+        clear: both;
+      }
+      .ui.vertical.stripe p {
+        font-size: 1.33em;
+      }
+      .ui.vertical.stripe .horizontal.divider {
+        margin: 3em 0em;
+      }
 
-  </style>
-  <link
-			rel="stylesheet"
-			type="text/css"
-			href="{% static 'css/style.css' %}"
-		/>
+      .quote.stripe.segment {
+        padding: 0em;
+      }
+      .quote.stripe.segment .grid .column {
+        padding-top: 5em;
+        padding-bottom: 5em;
+      }
 
+      .footer.segment {
+        padding: 5em 0em;
+      }
 
-  {% comment %} jQuery js {% endcomment %}
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-  {% comment %} Semantic UI js {% endcomment %}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.js" integrity="sha512-aAW/TaSuYfyjTcMsaYP67Dwe0vI5d7ej9X7NJBPkhafB+D5kx57flRNo8+tOXWA0Gcq0MBmhPatrvn1YwvH9gQ==" crossorigin="anonymous"></script>
+      .secondary.pointing.menu .toc.item {
+        display: none;
+      }
 
-  {% comment %} Sidebar js {% endcomment %}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sidebar.min.js" integrity="sha512-1tmZBYaLOUohS48wc5egam1rTAIi71yvIpxj0FXHo6FskhgMF3LyCAdLvCFYi4e/L0GfH6BFtDBFD2wVa645Dg==" crossorigin="anonymous"></script>
-  {% comment %} Visibility js {% endcomment %}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/visibility.min.js" integrity="sha512-pcX/bEmbHWxW0fvRU70A6UqVXm0Z1tBJTwSLHE3hE8AAhG4hDL8R19Oho4DmdCNNYrgDSyHhH+ALNg5d5SFxxw==" crossorigin="anonymous"></script>
-{% comment %} SWIPER {% endcomment %}
-<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      @media only screen and (max-width: 700px) {
+        .ui.fixed.menu {
+          display: none !important;
+        }
+        .secondary.pointing.menu .item,
+        .secondary.pointing.menu .menu {
+          display: none;
+        }
+        .secondary.pointing.menu .toc.item {
+          display: block;
+        }
+        .masthead.segment {
+          min-height: 350px;
+        }
+        .masthead h1.ui.header {
+          font-size: 2em;
+          margin-top: 1.5em;
+        }
+        .masthead h2 {
+          margin-top: 0.5em;
+          font-size: 1.5em;
+        }
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
 
+    {% comment %} jQuery js {% endcomment %}
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
+    {% comment %} Semantic UI js {% endcomment %}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+      integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.js"
+      integrity="sha512-aAW/TaSuYfyjTcMsaYP67Dwe0vI5d7ej9X7NJBPkhafB+D5kx57flRNo8+tOXWA0Gcq0MBmhPatrvn1YwvH9gQ=="
+      crossorigin="anonymous"
+    ></script>
 
-  <script>
-  $(document)
-    .ready(function() {
+    {% comment %} Sidebar js {% endcomment %}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sidebar.min.js"
+      integrity="sha512-1tmZBYaLOUohS48wc5egam1rTAIi71yvIpxj0FXHo6FskhgMF3LyCAdLvCFYi4e/L0GfH6BFtDBFD2wVa645Dg=="
+      crossorigin="anonymous"
+    ></script>
+    {% comment %} Visibility js {% endcomment %}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/visibility.min.js"
+      integrity="sha512-pcX/bEmbHWxW0fvRU70A6UqVXm0Z1tBJTwSLHE3hE8AAhG4hDL8R19Oho4DmdCNNYrgDSyHhH+ALNg5d5SFxxw=="
+      crossorigin="anonymous"
+    ></script>
+    {% comment %} SWIPER {% endcomment %}
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-      // fix menu when passed
-      $('.masthead')
-        .visibility({
+    <script>
+      $(document).ready(function () {
+        // fix menu when passed
+        $(".masthead").visibility({
           once: false,
-          onBottomPassed: function() {
-            $('.fixed.menu').transition('fade in');
+          onBottomPassed: function () {
+            $(".fixed.menu").transition("fade in");
           },
-          onBottomPassedReverse: function() {
-            $('.fixed.menu').transition('fade out');
-          }
-        })
-      ;
+          onBottomPassedReverse: function () {
+            $(".fixed.menu").transition("fade out");
+          },
+        });
 
-      // create sidebar and attach to menu open
-      $('.ui.sidebar')
-        .sidebar('attach events', '.toc.item')
-      ;
+        // create sidebar and attach to menu open
+        $(".ui.sidebar").sidebar("attach events", ".toc.item");
 
-      $("#login_modal").click(function () {
-          console.log('clicked');
-          $('.ui.modal.login').modal('show');
+        $("#login_modal").click(function () {
+          console.log("clicked");
+          $(".ui.modal.login").modal("show");
+        });
+
+        $("#hide_modal").click(function () {
+          console.log("clicked");
+          $(".ui.modal.login").modal("hide");
+        });
+
+        $("#signup_modal").click(function () {
+          console.log("clicked");
+          $(".ui.modal.signup").modal("show");
+        });
       });
+    </script>
+  </head>
 
-      $("#hide_modal").click(function () {
-          console.log('clicked');
-          $('.ui.modal.login').modal('hide');
-      });
-
-      $("#signup_modal").click(function () {
-          console.log('clicked');
-          $('.ui.modal.signup').modal('show');
-      });
-    })
-  ;
-  </script>
-  
-
-</head>
-
-<body class="pushable" data-new-gr-c-s-check-loaded="14.991.0" data-gr-ext-installed="" cz-shortcut-listen="true">
-
-{% comment %} ==== MODAL CONTENT ==== {% endcomment %}
+  <body
+    id="body"
+    class="pushable"
+    data-new-gr-c-s-check-loaded="14.991.0"
+    data-gr-ext-installed=""
+    cz-shortcut-listen="true"
+  >
+    {% comment %} ==== MODAL CONTENT ==== {% endcomment %}
 <div class="ui modal login"> <i class="close icon"></i>
     <div class="header">Login Modal Title</div>
     <div class="content">
@@ -207,18 +238,10 @@
     </div>
 </div>
 
-
-
-
 {% comment %} ==== NAV CONTENT ==== {% endcomment %}
 <!-- Following Menu -->
 <div class="ui large top fixed menu transition hidden">
   <div class="ui container">
-
-    
-    <i class="fab fa-weebly"></i>
-    
-
     <a class="active item">Home</a>
     <a class="item">About</a>
     <div class="right menu">
@@ -240,66 +263,80 @@
   <a class="item">Signup</a>
 </div>
 
+    <!-- Sidebar Menu -->
+    <div class="ui vertical inverted sidebar menu left">
+      <a href="/" class="active item">Home</a>
+      <a href="/about" class="item">About</a>
+      {% if user.is_authenticated %}
+      <a href="/profile" class="item">Profile</a>
+      <a class="item" href="{% url 'logout' %}">Log Out</a>
+      {% endif %}
+    </div>
 
-<!-- Page Contents -->
-<div class="pusher">
-  <div id = "masthead" class="ui inverted vertical masthead center aligned segment">
+    <!-- Page Contents -->
+    <div class="pusher">
+      <div
+        id="masthead"
+        class="ui inverted vertical masthead center aligned segment"
+      >
+        <div id="navbar" class="ui container">
+          <div class="ui large secondary inverted pointing menu">
+            <a class="toc item">
+              <i class="sidebar icon"></i>
+            </a>
+            <a href="/" class="fab fa-weebly" id="logo-nav"></a>
 
-    <div id="navbar" class="ui container">
-      <div class="ui large secondary inverted pointing menu">
-        <a class="toc item">
-          <i class="sidebar icon"></i>
-        </a>
-        <i class="fab fa-weebly"></i>
-        <a href="/" class="active item">Home</a>
-        <a href="/about" class="item">About</a>
-        {% comment %} Left side nave if logged in {% endcomment %}
-          {% if user.is_authenticated %}
+            <a href="/" class="active item">Home</a>
+            <a href="/about" class="item">About</a>
+            {% if user.is_authenticated %}
             <a href="/profile" class="item">Profile</a>
-          {% endif %}
-        <div class="right item">
-          {% comment %} MAIN NAV LINKS {% endcomment %}
-          {% if user.is_authenticated %}
-            <a class="ui inverted button" href="{% url 'logout' %}">Log Out</a>
-          {% else %}
-            <a class="ui inverted button" id="login_modal">Log in</a>
-            <a class="ui inverted button" id="signup_modal">Sign Up</a>
-          {% endif %}
+            {% endif %}
+            <div class="right item">
+              {% if user.is_authenticated %}
+              <a class="ui inverted button" href="{% url 'logout' %}"
+                >Log Out</a
+              >
+              {% else %}
+              <a class="ui inverted button" id="login_modal">Log in</a>
+              <a class="ui inverted button" id="signup_modal">Sign Up</a>
+              {% endif %}
+            </div>
+          </div>
+      </div>
+
+      {% comment %} ===== BLOCK CONTENT ===== {% endcomment %} 
+      {% block content%} {% endblock %} 
+      
+      {% comment %} ==== FOOTER ==== {% endcomment %}
+      <div id="footer" class="ui inverted vertical footer segment">
+        <div class="ui container">
+          <div
+            class="ui stackable inverted divided equal height stackable grid"
+          >
+            <div class="three wide column">
+              <h4 class="ui inverted header">About</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Sitemap</a>
+                <a href="#" class="item">Contact Us</a>
+              </div>
+            </div>
+            <div class="three wide column">
+              <h4 class="ui inverted header">Services</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Banana Pre-Order</a>
+                <a href="#" class="item">DNA FAQ</a>
+              </div>
+            </div>
+            <div class="seven wide column">
+              <h4 class="ui inverted header">Footer Header</h4>
+              <p>
+                Extra space for a call to action inside the footer that could
+                help re-engage users.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-{% comment %} ===== BLOCK CONTENT ===== {% endcomment %}
-{% block content %}
-{% endblock %}
-
-{% comment %} ==== FOOTER ==== {% endcomment %}
-  <div id="footer" class="ui inverted vertical footer segment">
-    <div class="ui container">
-      <div class="ui stackable inverted divided equal height stackable grid">
-        <div class="three wide column">
-          <h4 class="ui inverted header">About</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Sitemap</a>
-            <a href="#" class="item">Contact Us</a>
-          </div>
-        </div>
-        <div class="three wide column">
-          <h4 class="ui inverted header">Services</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Banana Pre-Order</a>
-            <a href="#" class="item">DNA FAQ</a>
-          </div>
-        </div>
-        <div class="seven wide column">
-          <h4 class="ui inverted header">Footer Header</h4>
-          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-</body>
-
+  </body>
 </html>
