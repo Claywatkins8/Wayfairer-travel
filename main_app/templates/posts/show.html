@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<p>Title: {{ post.title }}</p>
-<p>Author: {{ user.username }}</p>
-<p>Content: {{ post.content }}</p>
+<div id="container-box" class="ui center aligned stackable grid container">
+    <div id="left-box" class="four wide computer three wide tablet six wide mobile column">
+        <div class="ui segment">
 
-<a href="{% url 'post_edit' post_id=post.id %}">Edit</a>
-<a href="{% url 'post_delete' post_id=post.id %}">Delete</a>
+            <p>Title: {{ post.title }}</p>
+            <p>Author: {{ user.username }}</p>
+            <p>Content: {{ post.content }}</p>
+        </div>
+    </div>
+</div>
+
+<a href="{% url 'post_edit' post_id=post.id %}" class="ui inverted button">Edit</a>
+<a href="{% url 'post_delete' post_id=post.id %}" class="ui inverted button">Delete</a>
 
 {% endblock %}
