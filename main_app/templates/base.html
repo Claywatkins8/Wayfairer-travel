@@ -168,7 +168,7 @@
     <script>
       $(document).ready(function () {
         // fix menu when passed
-        /*
+        /* REVIEW: FIXED MENU HERE, WITH HAMBURGER MENU?*/
         $(".masthead").visibility({
           once: false,
           onBottomPassed: function () {
@@ -178,7 +178,7 @@
             $(".fixed.menu").transition("fade out");
           },
         });
-        */
+        
 
         // create sidebar and attach to menu open
         $(".ui.sidebar").sidebar("attach events", ".toc.item");
@@ -210,7 +210,7 @@
   >
     {% comment %} ==== MODAL CONTENT ==== {% endcomment %}
 <div class="ui modal login"> <i class="close icon"></i>
-    <div class="header">Login Modal Title</div>
+    <div class="header">Login</div>
     <div class="content">
       <form method="POST" action = "{% url 'login' %}">
           {% csrf_token %}
@@ -234,7 +234,7 @@
               </div>
             {% endif %}
     <div class="actions">
-          <input type="submit" class="ui inverted button" value="login"/>
+          <input type="submit" class="ui inverted button" value="Login"/>
           <input type="hidden" name="next" value="{{ next }}"/>
     </div>
       </form>    
@@ -242,7 +242,7 @@
 </div>
 
 <div class="ui modal signup"> <i class="close icon"></i>
-    <div class="header">Sign Up Modal Title</div>
+    <div class="header">Sign Up</div>
     <div class="content">
     {% comment %} NEW FORM {% endcomment %}
       <form method="POST" action = "{% url 'home' %}">
@@ -364,12 +364,10 @@
 
     <!-- MAIN NAV MENU Contents -->
     <div class="pusher">
-      <div
-        id="masthead"
-        class="ui inverted vertical masthead center aligned segment"
-      >
+      <div id="masthead" class="ui inverted vertical masthead center aligned segment">
         <div id="navbar" class="ui container">
-          <div class="ui large secondary inverted pointing fixed menu">
+          {% comment %} REVIEW: ADD FIXED CLASS HERE FOR FIXED MENU, RESPONSIVE HAMBURGER MENU DOES NOT WORK AFTER {% endcomment %}
+          <div class="ui large secondary inverted pointing menu">
             <a class="toc item">
               <i class="sidebar icon"></i>
             </a>
@@ -386,7 +384,7 @@
                 >Log Out</a
               >
               {% else %}
-              <a class="ui inverted button" id="login_modal">Log in</a>
+              <a class="ui inverted button" id="login_modal">Login</a>
               <a class="ui inverted button" id="signup_modal">Sign Up</a>
               {% endif %}
             </div>
