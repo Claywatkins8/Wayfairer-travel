@@ -26,7 +26,7 @@
         <p> Email: {{ user.email }}</p>
         <p>Current City: {{ profile.current_city }}</p>
         {% if profile != "" %}
-          <a href="{% url 'profile_edit' %}">Edit Profile</a>
+          <a href="{% url 'profile_edit' %}" class="ui inverted button">Edit Profile</a>
         {% endif %}
     </div>
     
@@ -51,7 +51,7 @@
           </a>
       </div>
     {% endfor %}
-    <a href="{% url 'post_create' %}">Add Post</a>
+    <a href="{% url 'post_create' %}" class="ui inverted button">Add Post</a>
   </div>
 </div>
 
