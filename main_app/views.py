@@ -30,7 +30,7 @@ def home(request):
             return render(request, 'home.html', context)
         else:
             if User.objects.filter(email=email_form).exists():
-                context = {'eror': 'That email is already taken'}
+                context = {'error': 'That email is already taken'}
                 return render(request, 'home.html', context)
             else:
                 if signup_form.is_valid():
@@ -47,7 +47,7 @@ def home(request):
     signup_form = NewUserForm()
     login_form = AuthenticationForm()
     context = {'signup_form': signup_form,
-               'error_message': error_message, 'login_form': login_form, 'profile_form': profile_form}
+               'login_form': login_form, 'profile_form': profile_form}
     return render(request, 'home.html', context)
 
 
