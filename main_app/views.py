@@ -22,17 +22,32 @@ def home(request):
     error_message = ''
     if request.method == 'POST':
         signup_form = NewUserForm(request.POST)
-        if signup_form.is_valid():
-            user = signup_form.save()
-            login(request, user)
-            return redirect('profile/')
+        username_form = request.POST['username']
+        email_form = request.POST['email']
+        city = request.POST['current_city']
+        if User.objects.filter(username=username_form).exists():
+            context = {'error': 'Username is already taken'}
+            return render(request, 'home.html', context)
         else:
-            error_message = 'Invalid signup, please try again!'
+            if User.objects.filter(email=email_form).exists():
+                context = {'error': 'That email is already taken'}
+                return render(request, 'home.html', context)
+            else:
+                if signup_form.is_valid():
+                    user = signup_form.save()
+                    user.profile.current_city = city
+                    user.save()
+                    login(request, user)
+                    return redirect('profile/')
+                else:
+                    context = {'error': 'Invalid signup, please try again!'}
+                    return render(request, 'home.html', context)
 
+    profile_form = Profile_Form()
     signup_form = NewUserForm()
     login_form = AuthenticationForm()
     context = {'signup_form': signup_form,
-               'error_message': error_message, 'login_form': login_form}
+               'login_form': login_form, 'profile_form': profile_form}
     return render(request, 'home.html', context)
 
 
