@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+
+<div id="container-box" class="ui center aligned stackable grid container">
+
+    {% comment %} LEFT BOX {% endcomment %}
+    <div id="left-box" class="four wide computer three wide tablet six wide mobile column">
+
+
+        <h3 class="ui center aligned header">CITY NAME GOES HERE</h3>
+
+        <div class="ui segment">
+            {{city.name}}
+            {{city.country}}
+        </div>
+
+
+    </div>
+
+
+
+    {% comment %} RIGHT BOX {% endcomment %}
+    <div id="right-box" class="nine wide computer nine wide tablet six wide mobile column">
+        <h3 class="ui center aligned header">Posts</h3>
+        {% for post in posts %}
+        <div class="ui segment">
+            <a href="{% url 'post_show' post_id=post.id %}">
+                <p>{{ post.title }}</p>
+            </a>
+        </div>
+        {% endfor %}
+        <a href="{% url 'post_create' %}" class="ui inverted button">Add Post</a>
+    </div>
+</div>
+
+</div>
+
+{% endblock %}
