@@ -81,14 +81,15 @@ def profile_edit(request):
     profile = Profile.objects.get(user_id=request.user.id)
     user = User.objects.get(id=request.user.id)
     if request.method == 'POST':
+        print("I am in the post")
         city = request.POST['current_city']
-        user_form = NewUserForm(request.POST, instance=user)
-        if user_form.is_valid():
-            print('I got this far!!!!')
-            user = user_form.save()
-            user.profile.current_city = city
-            user.save()
-            return redirect('profile')
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        user.last_name = last_name
+        user.first_name = first_name
+        user.profile.current_city = city
+        user.save()
+        return redirect('profile')
 
     profile_form = Profile_Form(instance=profile)
     user_form = NewUserForm(instance=user)
