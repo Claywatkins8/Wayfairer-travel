@@ -22,17 +22,32 @@ def home(request):
     error_message = ''
     if request.method == 'POST':
         signup_form = NewUserForm(request.POST)
-        if signup_form.is_valid():
-            user = signup_form.save()
-            login(request, user)
-            return redirect('profile/')
+        username_form = request.POST['username']
+        email_form = request.POST['email']
+        city = request.POST['current_city']
+        if User.objects.filter(username=username_form).exists():
+            context = {'error': 'Username is already taken'}
+            return render(request, 'home.html', context)
         else:
-            error_message = 'Invalid signup, please try again!'
+            if User.objects.filter(email=email_form).exists():
+                context = {'error': 'That email is already taken'}
+                return render(request, 'home.html', context)
+            else:
+                if signup_form.is_valid():
+                    user = signup_form.save()
+                    user.profile.current_city = city
+                    user.save()
+                    login(request, user)
+                    return redirect('profile/')
+                else:
+                    context = {'error': 'Invalid signup, please try again!'}
+                    return render(request, 'home.html', context)
 
+    profile_form = Profile_Form()
     signup_form = NewUserForm()
     login_form = AuthenticationForm()
     context = {'signup_form': signup_form,
-               'error_message': error_message, 'login_form': login_form}
+               'login_form': login_form, 'profile_form': profile_form}
     return render(request, 'home.html', context)
 
 
@@ -66,15 +81,18 @@ def profile_edit(request):
     profile = Profile.objects.get(user_id=request.user.id)
     user = User.objects.get(id=request.user.id)
     if request.method == 'POST':
-        profile_form = Profile_Form(request.POST, instance=profile)
-        if profile_form.is_valid():
-            profile_form.save()
+        city = request.POST['current_city']
+        user_form = NewUserForm(request.POST, instance=user)
+        if user_form.is_valid():
+            print('I got this far!!!!')
+            user = user_form.save()
+            user.profile.current_city = city
+            user.save()
             return redirect('profile')
 
     profile_form = Profile_Form(instance=profile)
     user_form = NewUserForm(instance=user)
-    context = {'profile_form': profile_form, 'profile': profile,
-               'user_form': user_form, 'user': user}
+    context = {'profile_form': profile_form, 'user_form': user_form, 'user': user, 'profile': profile}
     return render(request, 'profiles/edit.html', context)
 
 
@@ -95,7 +113,12 @@ def post_create(request):
 
 def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
-    context = {'post': post}
+    user = User.objects.get(id=post.user_id)
+    # if Profile.objects.filter(user_id=request.user.id):
+        # profile = Profile.objects.get(user_id=request.user.id)
+
+
+    context = {'post': post, 'user':user }
     return render(request, 'posts/show.html', context)
 
 
@@ -139,6 +162,10 @@ def add_photo(request, profile_id):
             print('An error occurred uploading file to S3')
     return redirect('profile')
 
+
+def photo_delete(request, photo_id):
+    Photo.objects.get(id=photo_id).delete()
+    return redirect('profile')
 
 # REVIEW: Do not need page anymore? in modal?
 # def signup(request):

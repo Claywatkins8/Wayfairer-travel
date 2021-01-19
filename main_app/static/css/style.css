@@ -6,21 +6,23 @@
 #C62F2C - red
 #FDFDFD - white
 #B6ABB7 - grey
-
- */
+*/
 
 #container-box {
   margin: 50px 0px;
 }
 #left-box {
 }
-#right-box {
-}
 
 #navbar,
 #masthead,
-#footer {
+#footer,
+.ui.menu.fixed {
   background-color: #05040a;
+}
+
+.ui.menu.fixed {
+  background-color: #05040a !important;
 }
 
 .ui.center.aligned.header {
@@ -51,7 +53,7 @@
   font-size: 18px;
   background: #05040a;
 
-  /* Center slide text vertically */
+  /* SWIPER Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -74,7 +76,26 @@
   object-fit: contain;
 }
 
+/* LOGO ICON */
 .fab {
-  color: red;
+  color: #c62f2c;
   font-size: 50px;
+}
+#logo-nav {
+  padding-right: 15px;
+}
+#logo-nav:hover {
+  color: #fdfdfd;
+}
+#logo-follow {
+  padding-right: 15px;
+}
+#logo-follow:hover {
+  color: #b6abb7;
+}
+
+/* PROFILE IMAGE */
+.profile-img {
+  max-width: 100%;
+  padding-bottom: 50px;
 }

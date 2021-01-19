@@ -1,59 +1,63 @@
 {% extends 'base.html' %} {% block content %}
 
 <div id="container-box" class="ui center aligned stackable grid container">
-  <div
-    id="left-box"
-    class="four wide computer three wide tablet six wide mobile column"
-  >
+  <div id="left-box" class="four wide computer three wide tablet six wide mobile column">
+
+
     <h3 class="ui center aligned header">{{ user.first_name}} {{user.last_name}}</h3>
+
     <div class="ui segment">
-    {% comment %} PHOTO {% endcomment %}
-        {% for photo in profile.photo_set.all %}
-      <img class="" src="{{photo.url}}">
-    {% empty %}
-      <div class="">No Photos Uploaded</div>
+      {% comment %} PHOTO {% endcomment %}
+      {% for photo in profile.photo_set.all %}
+      <img class="profile-img" src="{{photo.url}}">
+      <a href="{% url 'photo_delete' photo_id=photo.id %}">Delete</a>
+      {% empty %}
+      <img class="profile-img" src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png">
+      {% comment %} <div class="">No Photos Uploaded</div> {% endcomment %}
+
+
       {% comment %} PHOTO FORM {% endcomment %}
       <form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST">
-    {% csrf_token %}
-    <input type="file" name="photo-file">
-    <br><br>
-    <input type="submit" class="btn" value="Upload Photo">
-</form>
-    {% endfor %}
-    {% comment %} User info {% endcomment %}
-        <p>Date Joined: {{ user.date_joined }}</p>
-        <p> Email: {{ user.email }}</p>
-        <p>Current City: {{ profile.current_city }}</p>
-        {% if profile != "" %}
-          <a href="{% url 'profile_edit' %}">Edit Profile</a>
-        {% endif %}
-    </div>
-    
-    {% if profile == "" %}
-      <form action="{% url 'profile' %}" method="POST">
         {% csrf_token %}
-        {{profile_form.as_p}}
-        <input class='ui inverted button' type="submit" value='Add Current City'>
+
+        <input type="file" name="photo-file">
+        <br><br>
+        <input type="submit" class="btn" value="Upload Photo">
       </form>
+      {% endfor %}
+
+
+      {% comment %} User info {% endcomment %}
+      <p>Date Joined: {{ user.date_joined }}</p>
+      <p> Email: {{ user.email }}</p>
+      <p>Current City: {{ profile.current_city }}</p>
+      {% if profile != "" %}
+      <a href="{% url 'profile_edit' %}" class="ui inverted button">Edit Profile</a>
+      {% endif %}
+    </div>
+
+    {% if profile == "" %}
+    <form action="{% url 'profile' %}" method="POST">
+      {% csrf_token %}
+      {{profile_form.as_p}}
+      <input class='ui inverted button' type="submit" value='Add Current City'>
+    </form>
     {% endif %}
   </div>
 
-  <div
-    id="right-box"
-    class="nine wide computer nine wide tablet six wide mobile column"
-  >
+  <div id="right-box" class="nine wide computer nine wide tablet six wide mobile column">
     <h3 class="ui center aligned header">Posts</h3>
     {% for post in posts %}
-      <div class="ui segment">
-          <a href="{% url 'post_show' post_id=post.id %}">
-            <p>{{ post.title }}</p>
-          </a>
-      </div>
+    <div class="ui segment">
+      <a href="{% url 'post_show' post_id=post.id %}">
+        <p>{{ post.title }}</p>
+      </a>
+    </div>
     {% endfor %}
-    <a href="{% url 'post_create' %}">Add Post</a>
+    <a href="{% url 'post_create' %}" class="ui inverted button">Add Post</a>
   </div>
 </div>
 
-   </div>
+</div>
 
 {% endblock %}
