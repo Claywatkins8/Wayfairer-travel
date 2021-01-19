@@ -8,11 +8,11 @@
 
         <h3 class="ui center aligned header">CITY NAME GOES HERE</h3>
 
+        {% for city in city_all %}
         <div class="ui segment">
             {{city.name}}
-            {{city.country}}
         </div>
-
+        {% endfor %}
 
     </div>
 
@@ -21,6 +21,10 @@
     {% comment %} RIGHT BOX {% endcomment %}
     <div id="right-box" class="nine wide computer nine wide tablet six wide mobile column">
         <h3 class="ui center aligned header">Posts</h3>
+        <div class="ui segment">    
+            <h1>{{city_id.name}}</h1>
+            <p>{{city_id.country}}</p>
+        </div>
         {% for post in posts %}
         <div class="ui segment">
             <a href="{% url 'post_show' post_id=post.id %}">
