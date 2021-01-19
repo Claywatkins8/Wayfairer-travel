@@ -1,8 +1,37 @@
 {% extends 'base.html' %} {% block content %}
 
-<form action="{% url 'profile_edit' %}" method="POST">
-  {% csrf_token %} {{ user_form.as_p }} {{ profile_form.as_p }}
-  <input type="submit" value="Edit Profile" />
-</form>
+<div id="container-box" class="ui center aligned stackable grid container">
 
+<form action="{% url 'home' %}" method="POST">
+  {% csrf_token %}
+
+            <div class="ui equal width form">
+                <div class="fields">
+                <div class="field">
+                  <label>First Name</label>
+                  <input type="text" name="first_name" placeholder="John" >
+                </div>
+                <div class="field">
+                  <label>Last Name</label>
+                  <input type="text" name="last_name" placeholder="Smith" >
+                </div>
+                </div>
+                   
+                <div class="field">
+                  <label>Current City</label>
+                  <input type="text" name="current_city" placeholder="Seattle" >
+                </div>
+                </div>
+            </div>
+            {% if error %}
+              <div class="ui error message">
+                <div class="header">Action Forbidden</div>
+                 <p>{{error}}</p>
+              </div>
+            {% endif %}
+
+  <input type="submit" class="ui inverted button" value="Edit Profile" />
+
+</form>
+</div>
 {% endblock %}
