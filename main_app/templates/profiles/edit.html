@@ -2,24 +2,24 @@
 
 <div id="container-box" class="ui center aligned stackable grid container">
 
-<form action="{% url 'home' %}" method="POST">
+<form action="{% url 'profile_edit' %}" method="POST">
   {% csrf_token %}
 
             <div class="ui equal width form">
                 <div class="fields">
                 <div class="field">
                   <label>First Name</label>
-                  <input type="text" name="first_name" placeholder="John" >
+                  <input type="text" name="first_name" value="{{ user.first_name }}" >
                 </div>
                 <div class="field">
                   <label>Last Name</label>
-                  <input type="text" name="last_name" placeholder="Smith" >
+                  <input type="text" name="last_name" value="{{ user.last_name }}" >
                 </div>
                 </div>
                    
                 <div class="field">
                   <label>Current City</label>
-                  <input type="text" name="current_city" placeholder="Seattle" >
+                  <input type="text" name="current_city" value="{{ profile.current_city }}" >
                 </div>
                 </div>
             </div>
