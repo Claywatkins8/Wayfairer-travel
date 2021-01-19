@@ -10,7 +10,9 @@
 
         {% for city in city_all %}
         <div class="ui segment">
+        <a href="/cities/{{city.id}}">
             {{city.name}}
+        </a>
         </div>
         {% endfor %}
 
