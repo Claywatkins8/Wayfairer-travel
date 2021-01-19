@@ -17,6 +17,13 @@ BUCKET = 'wayfarer-app1'
 
 # Define the home views
 
+def city_show(request, city_id):
+    city_id = City.objects.get(id=city_id)
+    city_all = City.objects.all()
+    posts = Post.objects.all()
+    context = {'posts': posts, 'city_id': city_id, 'city_all': city_all}
+    return render(request, 'cities/city.html', context)
+
 
 def home(request):
     error_message = ''
