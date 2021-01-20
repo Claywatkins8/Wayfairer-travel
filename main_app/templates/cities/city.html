@@ -31,12 +31,11 @@
       <p>{{city_id.country}}</p>
     </div>
     <a
-      href="{% url 'post_create' city_id=city_id.id %}"
+      id="post_modal"
       class="ui inverted button"
       >Add Post</a
     >
     {% for post in posts %}
-
     <div class="ui card">
       <div class="content">
         <i
@@ -50,6 +49,8 @@
       </div>
     </div>
     
+
+    {% comment %} DELETE MODAL {% endcomment %}
       <div id="modal-{{ post.id }}" class="ui modal delete">
         <i class="close icon"></i>
         <div class="header">
@@ -68,6 +69,38 @@
       {% endfor %}
     </div>
   </div>
+</div>
+
+{% comment %} POST MODAL {% endcomment %}
+<div class="ui modal post"> <i class="close icon"></i>
+    <div class="header">New Post</div>
+    <div class="content">
+      <form method="POST" action = "{% url 'post_create' city_id=city_id.id %}">
+          {% csrf_token %}
+{% comment %} NEW SEMANTIC FORM {% endcomment %}
+            <div class="ui equal width form error">
+             
+                <div class="field">
+                  <label>Title</label>
+                  <input type="text" placeholder="Title" name="title">
+                </div>
+                <div class="field">
+                  <label>Content</label>
+                  <textarea cols="40" rows="10" name="content"></textarea>
+                </div>
+          
+            </div>
+            {% if error_message %}
+              <div class="ui error message">
+                <div class="header">Action Forbidden</div>
+                 <p>{{error_message}}</p>
+              </div>
+            {% endif %}
+    <div class="actions">
+          <input type="submit" class="ui inverted button" value="Create Post"/>
+    </div>
+      </form>    
+    </div>
 </div>
 
 {% endblock %}
