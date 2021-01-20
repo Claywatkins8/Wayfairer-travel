@@ -147,6 +147,10 @@ def post_delete(request, post_id):
     Post.objects.get(id=post_id).delete()
     return redirect('profile')
 
+def post_delete_city(request, post_id, city_id):
+    Post.objects.get(id=post_id).delete()
+    return redirect('city_show', city_id=city_id)
+
 # AWS ADD PHOTO
 
 
