@@ -20,7 +20,7 @@ BUCKET = 'wayfarer-app1'
 def city_show(request, city_id):
     city_id = City.objects.get(id=city_id)
     city_all = City.objects.all()
-    posts = Post.objects.all()
+    posts = Post.objects.filter(city_id = city_id)
     context = {'posts': posts, 'city_id': city_id, 'city_all': city_all}
     return render(request, 'cities/city.html', context)
 
@@ -88,7 +88,6 @@ def profile_edit(request):
     profile = Profile.objects.get(user_id=request.user.id)
     user = User.objects.get(id=request.user.id)
     if request.method == 'POST':
-        print("I am in the post")
         city = request.POST['current_city']
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -104,19 +103,19 @@ def profile_edit(request):
     return render(request, 'profiles/edit.html', context)
 
 
-def post_create(request):
+def post_create(request, city_id):
     if request.method == 'POST':
         post_form = Post_Form(request.POST)
         print(post_form)
         if post_form.is_valid():
             new_post = post_form.save(commit=False)
             new_post.user = request.user
-            new_post.city_id = 1 # write a query that will pull the current city from profile
+            new_post.city_id = city_id 
             new_post.save()
-            return redirect('profile')
+            return redirect('city_show', city_id=city_id)
 
     post_form = Post_Form()
-    context = {'post_form': post_form}
+    context = {'post_form': post_form, 'city_id': city_id}
     return render(request, 'posts/create.html', context)
 
 

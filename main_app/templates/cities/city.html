@@ -28,7 +28,7 @@
             <h1>{{city_id.name}}</h1>
             <p>{{city_id.country}}</p>
         </div>
-        <a href="{% url 'post_create' %}" class="ui inverted button">Add Post</a>
+        <a href="{% url 'post_create' city_id=city_id.id %}" class="ui inverted button">Add Post</a>
         {% for post in posts %}
         <div class="ui segment">
             <a href="{% url 'post_show' post_id=post.id %}">
