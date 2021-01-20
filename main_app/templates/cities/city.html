@@ -4,8 +4,7 @@
   {% comment %} LEFT BOX {% endcomment %}
   <div
     id="left-box"
-    class="four wide computer three wide tablet six wide mobile column"
-  >
+    class="four wide computer three wide tablet six wide mobile column">
     <div class="ui segment">
       <h3 class="ui center aligned header">Cities</h3>
 
@@ -15,7 +14,7 @@
           <div id="thumb-container" class="img ten wide column left aligned">
             <img
               id="city-thumb"
-              src="/static/resources/{{ city_id.image }}"
+              src="/static/resources/{{ city.image }}"
               alt="{{ city_id.name }}"
             />
           </div>
@@ -23,8 +22,9 @@
             <a href="/cities/{{city.id}}"> {{city.name}} </a>
           </div>
         </div>
+       </div>
         {% endfor %}
-      </div>
+     
     </div>
   </div>
   {% comment %} RIGHT BOX {% endcomment %}

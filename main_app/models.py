@@ -10,7 +10,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     current_city = models.CharField(max_length=100, blank=True)
-    # image = models.ImageField()
+    
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -21,11 +21,15 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
+    
 
 class City(models.Model):
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     image = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return f"{self.city.name}"
 
 
 class Post(models.Model):
@@ -33,6 +37,12 @@ class Post(models.Model):
     content = models.TextField(max_length=1500)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-id']
+
+    def __str__(self):
+        return f"{self.post.title}"
 
 
 class Photo(models.Model):
