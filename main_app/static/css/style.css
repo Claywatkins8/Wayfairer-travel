@@ -122,3 +122,7 @@
   max-height: 110px;
   padding: 5px;
 }
+
+#create_post {
+  margin: 20px;
+}
