@@ -107,15 +107,16 @@ def profile_edit(request):
 def post_create(request):
     if request.method == 'POST':
         post_form = Post_Form(request.POST)
+        print(post_form)
         if post_form.is_valid():
             new_post = post_form.save(commit=False)
             new_post.user = request.user
-            new_post.city_id = 1  # write a query that will pull the current city from profile
+            new_post.city_id = 1 # write a query that will pull the current city from profile
             new_post.save()
             return redirect('profile')
 
     post_form = Post_Form()
-    context = {'post_form': post_form, }
+    context = {'post_form': post_form}
     return render(request, 'posts/create.html', context)
 
 

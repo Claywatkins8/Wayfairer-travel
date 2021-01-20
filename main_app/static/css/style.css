@@ -99,3 +99,8 @@
   max-width: 100%;
   padding-bottom: 50px;
 }
+
+#city-img {
+  max-width: 50px;
+  max-height: 25px;
+}
