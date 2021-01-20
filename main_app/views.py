@@ -17,10 +17,11 @@ BUCKET = 'wayfarer-app1'
 
 # Define the home views
 
+
 def city_show(request, city_id):
     city_id = City.objects.get(id=city_id)
     city_all = City.objects.all()
-    posts = Post.objects.filter(city_id = city_id)
+    posts = Post.objects.filter(city_id=city_id)
     context = {'posts': posts, 'city_id': city_id, 'city_all': city_all}
     return render(request, 'cities/city.html', context)
 
@@ -62,6 +63,7 @@ def about(request):
     return render(request, 'about.html')
 
 
+@login_required
 def profile(request):
     if request.method == 'POST':
         profile_form = Profile_Form(request.POST)
@@ -84,6 +86,7 @@ def profile(request):
     return render(request, 'profile.html', context)
 
 
+@login_required
 def profile_edit(request):
     profile = Profile.objects.get(user_id=request.user.id)
     user = User.objects.get(id=request.user.id)
@@ -99,10 +102,12 @@ def profile_edit(request):
 
     profile_form = Profile_Form(instance=profile)
     user_form = NewUserForm(instance=user)
-    context = {'profile_form': profile_form, 'user_form': user_form, 'user': user, 'profile': profile}
+    context = {'profile_form': profile_form,
+               'user_form': user_form, 'user': user, 'profile': profile}
     return render(request, 'profiles/edit.html', context)
 
 
+@login_required
 def post_create(request, city_id):
     if request.method == 'POST':
         post_form = Post_Form(request.POST)
@@ -110,7 +115,7 @@ def post_create(request, city_id):
         if post_form.is_valid():
             new_post = post_form.save(commit=False)
             new_post.user = request.user
-            new_post.city_id = city_id 
+            new_post.city_id = city_id
             new_post.save()
             return redirect('city_show', city_id=city_id)
 
@@ -119,17 +124,18 @@ def post_create(request, city_id):
     return render(request, 'posts/create.html', context)
 
 
+@login_required
 def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     user = User.objects.get(id=post.user_id)
     # if Profile.objects.filter(user_id=request.user.id):
-        # profile = Profile.objects.get(user_id=request.user.id)
+    # profile = Profile.objects.get(user_id=request.user.id)
 
-
-    context = {'post': post, 'user':user }
+    context = {'post': post, 'user': user}
     return render(request, 'posts/show.html', context)
 
 
+@login_required
 def post_edit(request, post_id):
     post = Post.objects.get(id=post_id)
     if request.method == 'POST':
@@ -143,10 +149,13 @@ def post_edit(request, post_id):
     return render(request, 'posts/edit.html', context)
 
 
+@login_required
 def post_delete(request, post_id):
     Post.objects.get(id=post_id).delete()
     return redirect('profile')
 
+
+@login_required
 def post_delete_city(request, post_id, city_id):
     Post.objects.get(id=post_id).delete()
     return redirect('city_show', city_id=city_id)
@@ -154,6 +163,7 @@ def post_delete_city(request, post_id, city_id):
 # AWS ADD PHOTO
 
 
+@login_required
 def add_photo(request, profile_id):
     # photo-file will be the "name" attribute on the <input type="file">
     photo_file = request.FILES.get('photo-file', None)
@@ -175,6 +185,7 @@ def add_photo(request, profile_id):
     return redirect('profile')
 
 
+@login_required
 def photo_delete(request, photo_id):
     Photo.objects.get(id=photo_id).delete()
     return redirect('profile')

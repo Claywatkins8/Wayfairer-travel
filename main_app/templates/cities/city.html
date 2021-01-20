@@ -4,7 +4,8 @@
   {% comment %} LEFT BOX {% endcomment %}
   <div
     id="left-box"
-    class="four wide computer three wide tablet six wide mobile column">
+    class="four wide computer three wide tablet six wide mobile column"
+  >
     <div class="ui segment">
       <h3 class="ui center aligned header">Cities</h3>
 
@@ -22,9 +23,8 @@
             <a href="/cities/{{city.id}}"> {{city.name}} </a>
           </div>
         </div>
-       </div>
-        {% endfor %}
-     
+      </div>
+      {% endfor %}
     </div>
   </div>
   {% comment %} RIGHT BOX {% endcomment %}
@@ -97,11 +97,11 @@
       <div class="ui equal width form error">
         <div class="field">
           <label>Title</label>
-          <input type="text" placeholder="Title" name="title" />
+          <input type="text" placeholder="Title" name="title" required />
         </div>
         <div class="field">
           <label>Content</label>
-          <textarea cols="40" rows="10" name="content"></textarea>
+          <textarea cols="40" rows="10" name="content" required></textarea>
         </div>
       </div>
       {% if error_message %}
@@ -110,9 +110,9 @@
         <p>{{error_message}}</p>
       </div>
       {% endif %}
-      <div id="create_post" class="actions ">
+      <div id="create_post" class="actions">
         <input type="submit" class="ui inverted button" value="Create Post" />
-     </div>
+      </div>
     </form>
   </div>
 </div>
