@@ -30,11 +30,13 @@
         </div>
         <a href="{% url 'post_create' city_id=city_id.id %}" class="ui inverted button">Add Post</a>
         {% for post in posts %}
-        <div class="ui segment">
+        <div class="ui segment city_post" >
             <a href="{% url 'post_show' post_id=post.id %}">
                 <p>{{ post.title }}</p>
             </a>
+
             <i  id="{{post.id}}"  class="far fa-window-close delete_modal"></i>
+
         </div>
 
 <div id="modal-{{ post.id }}" class="ui modal delete"> <i class="close icon"></i>
