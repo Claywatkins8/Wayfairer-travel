@@ -184,19 +184,21 @@
         $(".ui.sidebar").sidebar("attach events", ".toc.item");
 
         $("#login_modal").click(function () {
-          console.log("clicked");
           $(".ui.modal.login").modal("show");
         });
 
         $("#hide_modal").click(function () {
-          console.log("clicked");
           $(".ui.modal.login").modal("hide");
         });
 
         $("#signup_modal").click(function () {
-          console.log("clicked");
           $(".ui.modal.signup").modal("show");
         });
+
+        $(".delete_modal").click(function () {        
+          $("#modal-"+this.id).modal("show");       
+        });
+ 
       });
     </script>
   </head>
