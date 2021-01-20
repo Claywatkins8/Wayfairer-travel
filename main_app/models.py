@@ -25,7 +25,7 @@ class Profile(models.Model):
 class City(models.Model):
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
-    # image = models.ImageField()
+    image = models.CharField(max_length=1000)
 
 
 class Post(models.Model):
