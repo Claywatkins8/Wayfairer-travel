@@ -81,16 +81,13 @@
   color: #c62f2c;
   font-size: 50px;
 }
-.city_post {
-  display: flex;
+.ui .card {
+  width: 100%;
+  text-align: left;
+  background-color: #fdfdfd !important;
 }
-.far {
-  color: #C62F2C;
-  font-weight: bold;
-  font-size: 25px;
-  position: absolute;
-  right: 25px;
-  text-align: center;
+.fa-window-close {
+  color: #c62f2c;
 }
 #logo-nav {
   padding-right: 15px;
@@ -112,6 +109,12 @@
 }
 
 #city-img {
+<<<<<<< HEAD
   max-width: 200px;
   max-height: 125px;
 }
+=======
+  max-width: 50px;
+  max-height: 25px;
+}
+>>>>>>> submaster

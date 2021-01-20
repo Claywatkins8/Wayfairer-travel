@@ -1,57 +1,73 @@
 {% extends 'base.html' %} {% block content %}
 
 <div id="container-box" class="ui center aligned stackable grid container">
+  {% comment %} LEFT BOX {% endcomment %}
+  <div
+    id="left-box"
+    class="four wide computer three wide tablet six wide mobile column"
+  >
+    <h3 class="ui center aligned header">CITY NAME GOES HERE</h3>
 
-    {% comment %} LEFT BOX {% endcomment %}
-    <div id="left-box" class="four wide computer three wide tablet six wide mobile column">
-
-
-        <h3 class="ui center aligned header">CITY NAME GOES HERE</h3>
-
-        {% for city in city_all %}
-        <div class="ui segment">
-        <a href="/cities/{{city.id}}">
-            {{city.name}}
-        </a>
-        </div>
-        {% endfor %}
-
+    {% for city in city_all %}
+    <div class="ui segment">
+      <a href="/cities/{{city.id}}"> {{city.name}} </a>
     </div>
+    {% endfor %}
+  </div>
 
-
-
-    {% comment %} RIGHT BOX {% endcomment %}
-    <div id="right-box" class="nine wide computer nine wide tablet six wide mobile column">
-        <h3 class="ui center aligned header">Posts</h3>
-        <div class="ui segment">    
-            <img id="city-img" src="/static/resources/{{ city_id.image }}" alt="{{ city_id.name }}">
-            <h1>{{city_id.name}}</h1>
-            <p>{{city_id.country}}</p>
-        </div>
-        <a href="{% url 'post_create' city_id=city_id.id %}" class="ui inverted button">Add Post</a>
-        {% for post in posts %}
-        <div class="ui segment city_post" >
-            <a href="{% url 'post_show' post_id=post.id %}">
-                <p>{{ post.title }}</p>
-            </a>
-
-            <i  id="{{post.id}}"  class="far fa-window-close delete_modal"></i>
-
-        </div>
-
-<div id="modal-{{ post.id }}" class="ui modal delete"> <i class="close icon"></i>
-    <div class="header">Are you sure you want to delete this post? {{post.title}}</div>
-    <div class="content">
-      
-          <a href="{% url 'post_delete' post_id=post.id %}" class="ui inverted button">Confirm Delete</a>
-          <input type="hidden" name="next" value="{{ next }}"/>
-    </div> 
-</div>
-
-        {% endfor %}
+  {% comment %} RIGHT BOX {% endcomment %}
+  <div
+    id="right-box"
+    class="nine wide computer nine wide tablet six wide mobile column"
+  >
+    <h3 class="ui center aligned header">Posts</h3>
+    <div class="ui segment">
+      <img
+        id="city-img"
+        src="/static/resources/{{ city_id.image }}"
+        alt="{{ city_id.name }}"
+      />
+      <h1>{{city_id.name}}</h1>
+      <p>{{city_id.country}}</p>
     </div>
-</div>
+    <a
+      href="{% url 'post_create' city_id=city_id.id %}"
+      class="ui inverted button"
+      >Add Post</a
+    >
+    {% for post in posts %}
 
+    <div class="ui card">
+      <div class="content">
+        <i
+          id="{{post.id}}"
+          class="right floated far fa-window-close delete_modal"
+        ></i>
+        <div class="header">{{ post.title }}</div>
+        <div class="description">
+          <p>{{ post.content }}</p>
+        </div>
+      </div>
+    </div>
+    
+      <div id="modal-{{ post.id }}" class="ui modal delete">
+        <i class="close icon"></i>
+        <div class="header">
+          Are you sure you want to delete: {{post.title}}?
+        </div>
+        <div class="content">
+          <a
+            href="{% url 'post_delete_city' post_id=post.id city_id=post.city_id %}"
+            class="ui inverted button"
+            >Confirm Delete</a
+          >
+          <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
 </div>
 
 {% endblock %}
