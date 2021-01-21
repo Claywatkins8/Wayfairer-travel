@@ -175,6 +175,9 @@ a:active {
   background-color: #05040a !important;
   margin-bottom: 140px;
 }
+#masthead {
+  margin-bottom: 140px;
+}
 #footer {
   position: fixed;
   left: 0;

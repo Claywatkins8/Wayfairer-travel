@@ -23,7 +23,8 @@ def city_show(request, city_id):
     city_all = City.objects.all()
     posts = Post.objects.filter(city_id=city_id)
     user = User.objects.get(id=request.user.id)
-    context = {'posts': posts, 'city_id': city_id, 'city_all': city_all, 'user': user}
+    context = {'posts': posts, 'city_id': city_id,
+               'city_all': city_all, 'user': user}
     return render(request, 'cities/city.html', context)
 
 
