@@ -52,10 +52,12 @@
       {% for post in posts %}
       <div class="ui card">
         <div class="content">
-          <i
-            id="{{post.id}}"
-            class="right floated far fa-window-close delete_modal"
-          ></i>
+          {% if user == post.user %}
+            <i
+              id="{{post.id}}"
+              class="right floated far fa-window-close delete_modal"
+            ></i>
+          {% endif %}
           <div class="header">
             <a href="{% url 'post_show' post_id=post.id %}"
               >{{ post.title }}
@@ -77,8 +79,7 @@
           <a
             href="{% url 'post_delete_city' post_id=post.id city_id=post.city_id %}"
             class="ui inverted button"
-            >Confirm Delete</a
-          >
+            >Confirm Delete</a>
           <input type="hidden" name="next" value="{{ next }}" />
         </div>
       </div>
