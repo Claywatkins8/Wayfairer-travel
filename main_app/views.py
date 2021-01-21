@@ -130,10 +130,12 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     user = User.objects.get(id=post.user_id)
     auth_user = User.objects.get(id=request.user.id)
+    nextvalue = request.GET.get('next')
+    print(nextvalue)
     # if Profile.objects.filter(user_id=request.user.id):
     # profile = Profile.objects.get(user_id=request.user.id)
 
-    context = {'post': post, 'user': user, 'auth_user': auth_user}
+    context = {'post': post, 'user': user, 'auth_user': auth_user, 'next': nextvalue}
     return render(request, 'posts/show.html', context)
 
 
@@ -153,21 +155,15 @@ def post_edit(request, post_id):
 
 
 @login_required
-def post_delete(request, post_id):
+def post_delete(request, post_id, city_id):
     item = Post.objects.get(id=post_id)
+    nextvalue = request.GET.get('next')
     if request.user == item.user:
         Post.objects.get(id=post_id).delete()
-        return redirect('profile')
-    else:
-        return redirect('city_show', city_id=city_id)
-
-
-@login_required
-def post_delete_city(request, post_id, city_id):
-    item = Post.objects.get(id=post_id)
-    if request.user == item.user:
-        Post.objects.get(id=post_id).delete()
-        return redirect('city_show', city_id=city_id)
+        if nextvalue != 'None':
+            return redirect(nextvalue)
+        else:
+            return redirect('profile')
     else:
         return redirect('city_show', city_id=city_id)
 
