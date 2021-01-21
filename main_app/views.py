@@ -138,11 +138,12 @@ def post_show(request, post_id):
 @login_required
 def post_edit(request, post_id):
     post = Post.objects.get(id=post_id)
-    if request.method == 'POST':
-        post_form = Post_Form(request.POST, instance=post)
-        if post_form.is_valid():
-            post_form.save()
-            return redirect('post_show', post_id=post.id)
+    if request.user == post.user:
+        if request.method == 'POST':
+            post_form = Post_Form(request.POST, instance=post)
+            if post_form.is_valid():
+                post_form.save()
+                return redirect('post_show', post_id=post.id)
 
     post_form = Post_Form(instance=post)
     context = {'post_form': post_form, 'post': post}
@@ -151,14 +152,24 @@ def post_edit(request, post_id):
 
 @login_required
 def post_delete(request, post_id):
-    Post.objects.get(id=post_id).delete()
-    return redirect('profile')
+    item = Post.objects.get(id=post_id)
+    if request.user == item.user:
+        Post.objects.get(id=post_id).delete()
+        return redirect('profile')
+    else:
+        return redirect('city_show', city_id=city_id)
 
 
 @login_required
 def post_delete_city(request, post_id, city_id):
-    Post.objects.get(id=post_id).delete()
-    return redirect('city_show', city_id=city_id)
+    item = Post.objects.get(id=post_id)
+    if request.user == item.user:
+        print('I made it here!!!!')
+        Post.objects.get(id=post_id).delete()
+        print('Now I made it here!!!')
+        return redirect('city_show', city_id=city_id)
+    else:
+        return redirect('city_show', city_id=city_id)
 
 # AWS ADD PHOTO
 
