@@ -12,8 +12,10 @@
     </div>
 </div>
 
-<a href="{% url 'post_edit' post_id=post.id %}" class="ui inverted button">Edit</a>
-<a href="{% url 'post_delete' post_id=post.id %}" class="ui inverted button">Delete</a>
-<a href="{% url 'post_delete_city' post_id=post.id city_id=post.city_id %}" class="ui inverted button">Delete and return to City</a>
+{% if auth_user == post.user %}
+    <a href="{% url 'post_edit' post_id=post.id %}" class="ui inverted button">Edit</a>
+    <a href="{% url 'post_delete' post_id=post.id %}" class="ui inverted button">Delete</a>
+    <a href="{% url 'post_delete_city' post_id=post.id city_id=post.city_id %}" class="ui inverted button">Delete and return to City</a>
+{% endif %}
 
 {% endblock %}

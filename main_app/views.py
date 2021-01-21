@@ -129,10 +129,11 @@ def post_create(request, city_id):
 def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     user = User.objects.get(id=post.user_id)
+    auth_user = User.objects.get(id=request.user.id)
     # if Profile.objects.filter(user_id=request.user.id):
     # profile = Profile.objects.get(user_id=request.user.id)
 
-    context = {'post': post, 'user': user}
+    context = {'post': post, 'user': user, 'auth_user': auth_user}
     return render(request, 'posts/show.html', context)
 
 
