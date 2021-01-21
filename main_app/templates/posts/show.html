@@ -3,13 +3,15 @@
 
 <div id="container-box" class="ui center aligned stackable grid container">
     <div id="left-box" class="six wide computer three wide tablet six wide mobile column">
-        <div class="ui segment">
-
-            <div class="header">{{ post.title }}</div>
-            <div class="meta">{{ user.username }}</div>
-            <div class="description">
+        <div  class="ui segment">
+            <div class="segment">
+                <div class="header">{{ post.title }}</div>
+                <div class="meta">{{ user.username }}</div>
+                <hr>
+                <div class="description">
                     {{ post.content }}
                 </div>
+            </div>
         </div>
     </div>
 </div> 

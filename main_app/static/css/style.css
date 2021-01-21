@@ -50,10 +50,6 @@ a:active {
   background-color: #35313f;
 }
 
-#post_show { 
-  background-color: #35313f !important;
-}
-
 .ui.inverted.button {
   background-color: #c62f2c;
   box-shadow: none !important;
