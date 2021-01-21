@@ -29,7 +29,8 @@ a:active {
   background-color: #05040a;
 }
 
-#navbar, .ui.secondary.pointing.menu {
+#navbar,
+.ui.secondary.pointing.menu {
   position: fixed;
   left: 0;
   top: 0;
@@ -131,20 +132,31 @@ a:active {
 }
 #right-box-img-container {
   height: 200px;
+  display: flex;
   overflow: hidden;
 }
 
 #city-img {
-  width: 100%;
+  overflow: hidden;
+  display: flex;
+  border-radius: 2%;
 }
+#city-img img {
+  width: 100%;
+  align-items: center;
+  align-self: center;
+}
+
 #thumb-container {
   height: 100px;
+  display: flex;
   overflow: hidden;
 }
 #city-thumb {
   width: 155px;
   height: 100%;
   padding: 5px;
+  align-items: center;
 }
 
 #create_post {

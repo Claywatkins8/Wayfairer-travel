@@ -39,11 +39,12 @@
           <p>{{city_id.country}}</p>
         </div>
         <div id="right-box-img-container" class="eleven wide column">
-          <img
-            id="city-img"
-            src="/static/resources/{{ city_id.image }}"
-            alt="{{ city_id.name }}"
-          />
+          <div id="city-img">
+            <img
+              src="/static/resources/{{ city_id.image }}"
+              alt="{{ city_id.name }}"
+            />
+          </div>
         </div>
       </div>
       <h3 class="ui center aligned header">Posts</h3>
