@@ -1,1 +1,1 @@
-web: gunicorn Wayfarer-App.wsgi
+web: gunicorn wayfarer_app.wsgi
