@@ -56,7 +56,7 @@
             class="right floated far fa-window-close delete_modal"
           ></i>
           <div class="header">
-            <a href="{% url 'post_show' post_id=post.id %}"
+            <a href="{% url 'post_show' post_id=post.id %}?next={{ request.path|urlencode }}"
               >{{ post.title }}
             </a>
           </div>

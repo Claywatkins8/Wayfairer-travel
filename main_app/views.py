@@ -128,6 +128,8 @@ def post_create(request, city_id):
 def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     user = User.objects.get(id=post.user_id)
+    value_next = request.POST.get('next')
+    print(value_next)
     # if Profile.objects.filter(user_id=request.user.id):
     # profile = Profile.objects.get(user_id=request.user.id)
 
@@ -164,9 +166,7 @@ def post_delete(request, post_id):
 def post_delete_city(request, post_id, city_id):
     item = Post.objects.get(id=post_id)
     if request.user == item.user:
-        print('I made it here!!!!')
         Post.objects.get(id=post_id).delete()
-        print('Now I made it here!!!')
         return redirect('city_show', city_id=city_id)
     else:
         return redirect('city_show', city_id=city_id)
