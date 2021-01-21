@@ -15,6 +15,16 @@ a:active {
   color: inherit;
 }
 
+.swiper-button-prev:after, .swiper-container-rtl .swiper-button-next:after, 
+.swiper-button-next:after, .swiper-container-rtl .swiper-button-prev:after
+{
+  color: #C62F2C;
+}
+
+.swiper-pagination-bullets .swiper-pagination-bullet {
+  background-color: #C62F2C;
+}
+
 #container-box {
   margin: 50px 0px;
 }
