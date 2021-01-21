@@ -411,24 +411,31 @@
             class="ui stackable inverted divided equal height stackable grid"
           >
             <div class="three wide column">
-              <h4 class="ui inverted header">About</h4>
+              <h4 class="ui inverted header">Connect</h4>
               <div class="ui inverted link list">
-                <a href="#" class="item">Sitemap</a>
-                <a href="#" class="item">Contact Us</a>
+                <a href="/about" class="item">About</a>
+                
               </div>
             </div>
             <div class="three wide column">
-              <h4 class="ui inverted header">Services</h4>
+              <h4 class="ui inverted header">Navigate</h4>
               <div class="ui inverted link list">
-                <a href="#" class="item">Banana Pre-Order</a>
-                <a href="#" class="item">DNA FAQ</a>
+              {% if user.is_authenticated %}
+            <a href="/profile" class="item">Profile</a>
+            <a href="/cities/1" class="item">City</a>
+            <a class="item" href="{% url 'logout' %}"
+                >Log Out</a
+              >
+               {% else %}
+              <a href="/" class="item">Home</a>
+        
+            {% endif %}
               </div>
             </div>
             <div class="seven wide column">
-              <h4 class="ui inverted header">Footer Header</h4>
+              <h4 class="ui inverted header">Wayfarer</h4>
               <p>
-                Extra space for a call to action inside the footer that could
-                help re-engage users.
+                Wayfarer app &copy 2021
               </p>
             </div>
           </div>
