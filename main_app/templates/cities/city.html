@@ -1,0 +1,122 @@
+{% extends 'base.html' %} {% block content %}
+
+<div id="container-box" class="ui center aligned stackable grid container">
+  {% comment %} LEFT BOX {% endcomment %}
+  <div
+    id="left-box"
+    class="four wide computer three wide tablet six wide mobile column"
+  >
+    <div class="ui segment">
+      <h3 class="ui center aligned header">Cities</h3>
+
+      {% for city in city_all %}
+      <div class="ui card">
+        <div class="ui grid middle aligned">
+          <div id="thumb-container" class="img ten wide column left aligned">
+            <img
+              id="city-thumb"
+              src="/static/resources/{{ city.image }}"
+              alt="{{ city_id.name }}"
+            />
+          </div>
+          <div class="six wide column">
+            <a href="/cities/{{city.id}}"> {{city.name}} </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% comment %} RIGHT BOX {% endcomment %}
+  <div
+    id="right-box"
+    class="nine wide computer nine wide tablet six wide mobile column"
+  >
+    <div class="ui segment">
+      <div class="ui grid center aligned">
+        <div id="city-name-banner" class="five wide column left aligned">
+          <h1>{{city_id.name}}</h1>
+          <p>{{city_id.country}}</p>
+        </div>
+        <div id="right-box-img-container" class="eleven wide column">
+          <div id="city-img">
+            <img
+              src="/static/resources/{{ city_id.image }}"
+              alt="{{ city_id.name }}"
+            />
+          </div>
+        </div>
+      </div>
+      <h3 class="ui center aligned header">Posts</h3>
+      <a id="post_modal" class="ui inverted button">Add Post</a>
+      {% for post in posts %}
+      <div class="ui card">
+        <div class="content">
+          {% if user == post.user %}
+            <i
+              id="{{post.id}}"
+              class="right floated far fa-window-close delete_modal"
+            ></i>
+          {% endif %}
+          <div class="header">
+            <a href="{% url 'post_show' post_id=post.id %}"
+              >{{ post.title }}
+            </a>
+          </div>
+          <div class="description">
+            <p>{{ post.content }}</p>
+          </div>
+        </div>
+      </div>
+
+      {% comment %} DELETE MODAL {% endcomment %}
+      <div id="modal-{{ post.id }}" class="ui modal delete">
+        <i class="close icon"></i>
+        <div class="header">
+          Are you sure you want to delete: {{post.title}}?
+        </div>
+        <div class="content">
+          <a
+            href="{% url 'post_delete_city' post_id=post.id city_id=post.city_id %}"
+            class="ui inverted button"
+            >Confirm Delete</a>
+          <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% comment %} POST MODAL {% endcomment %}
+<div class="ui modal post">
+  <i class="close icon"></i>
+  <div class="header">New Post</div>
+  <div class="content">
+    <form method="POST" action="{% url 'post_create' city_id=city_id.id %}">
+      {% csrf_token %} {% comment %} NEW SEMANTIC FORM {% endcomment %}
+      <div class="ui equal width form error">
+        <div class="field">
+          <label>Title</label>
+          <input type="text" placeholder="Title" name="title" required />
+        </div>
+        <div class="field">
+          <label>Content</label>
+          <textarea cols="40" rows="10" name="content" required></textarea>
+        </div>
+      </div>
+      {% if error_message %}
+      <div class="ui error message">
+        <div class="header">Action Forbidden</div>
+        <p>{{error_message}}</p>
+      </div>
+      {% endif %}
+      <div id="create_post" class="actions">
+        <input type="submit" class="ui inverted button" value="Create Post" />
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div id="container-box" class="ui center aligned stackable grid container">
+    <div id="left-box" class="four wide computer three wide tablet six wide mobile column">
+        <div class="ui segment">
+
+            <p>Title: {{ post.title }}</p>
+            <p>Author: {{ user.username }}</p>
+            <p>Content: {{ post.content }}</p>
+        </div>
+    </div>
+</div>
+
+{% if auth_user == post.user %}
+    <a href="{% url 'post_edit' post_id=post.id %}" class="ui inverted button">Edit</a>
+    <a href="{% url 'post_delete' post_id=post.id %}" class="ui inverted button">Delete</a>
+    <a href="{% url 'post_delete_city' post_id=post.id city_id=post.city_id %}" class="ui inverted button">Delete and return to City</a>
+{% endif %}
+
+{% endblock %}
