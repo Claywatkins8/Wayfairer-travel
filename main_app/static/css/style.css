@@ -144,3 +144,28 @@ a:active {
 #city-name-banner {
   min-width: 150px;
 }
+
+.pusher {
+  background-color: #05040a !important;
+  margin-bottom: 140px;
+}
+#footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
+@media only screen and (max-width: 770px) {
+  #masthead {
+    margin-bottom: 380px;
+  }
+}
+
+.topics {
+  background-color: #fdfdfd !important;
+}
+#topics-content {
+  margin-bottom: 380px;
+}
