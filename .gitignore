@@ -2,6 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,django,vscode,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,vscode,macos
 
+email.txt
+
 ### Django ###
 *.log
 *.pot

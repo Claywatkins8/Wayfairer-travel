@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Profile, User, Post, City, Photo
 from .forms import Profile_Form, NewUserForm, Post_Form
+
+from django.conf import settings
+from django.core.mail import send_mail
+
 # AWS IMPORTS
 import boto3
 import uuid
@@ -47,7 +51,14 @@ def home(request):
                     user = signup_form.save()
                     user.profile.current_city = city
                     user.save()
+                    print('made it to login')
                     login(request, user)
+                    subject = 'Welcome to Wayfarer'
+                    message = 'Thank you for registering'
+                    email_from = settings.EMAIL_HOST_USER
+                    recipient_list = [user.email,]
+                    print('made it to send mail')
+                    send_mail(subject, message, email_from, recipient_list)
                     return redirect('profile/')
                 else:
                     context = {'error': 'Invalid signup, please try again!'}
