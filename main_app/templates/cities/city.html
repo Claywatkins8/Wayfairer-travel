@@ -12,14 +12,15 @@
       {% for city in city_all %}
       <div class="ui card">
         <div class="ui grid middle aligned">
-          <div id="thumb-container" class="img ten wide column left aligned">
-            <img
-              id="city-thumb"
-              src="/static/resources/{{ city.image }}"
-              alt="{{ city_id.name }}"
-            />
+          <div id="thumb-container" class="img eight wide column left aligned">
+            <div id="city-thumb">
+              <img
+                src="/static/resources/{{ city.image }}"
+                alt="{{ city_id.name }}"
+              />
+            </div>
           </div>
-          <div class="six wide column">
+          <div class="eight wide column">
             <a href="/cities/{{city.id}}"> {{city.name}} </a>
           </div>
         </div>
@@ -53,13 +54,14 @@
       <div class="ui card">
         <div class="content">
           {% if user == post.user %}
-            <i
-              id="{{post.id}}"
-              class="right floated far fa-window-close delete_modal"
-            ></i>
+          <i
+            id="{{post.id}}"
+            class="right floated far fa-window-close delete_modal"
+          ></i>
           {% endif %}
           <div class="header">
-            <a href="{% url 'post_show' post_id=post.id %}?next={{request.get_full_path}}"
+            <a
+              href="{% url 'post_show' post_id=post.id %}?next={{request.get_full_path}}"
               >{{ post.title }}
             </a>
           </div>
@@ -79,7 +81,8 @@
           <a
             href="{% url 'post_delete' post_id=post.id city_id=post.city_id %}?next={{request.get_full_path}}"
             class="ui inverted button"
-            >Confirm Delete</a>
+            >Confirm Delete</a
+          >
           <input type="hidden" name="next" value="{{ next }}" />
         </div>
       </div>
