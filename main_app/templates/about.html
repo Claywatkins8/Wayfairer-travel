@@ -1,4 +1,89 @@
-{% extends 'base.html' %}
-{% block content %}
-<p> This is a test sentence.</p>
+{% extends 'base.html' %} {% block content %}
+<div id="container-box" class="ui eight column centered grid">
+  <div class="ui link cards">
+    <div class="card column">
+      <div class="image">
+        <img src="/static/resources/BrentNistal.jpeg" />
+      </div>
+      <div class="content">
+        <div class="header">Brent Nistal</div>
+        <div class="meta">
+          <a>Co-Creator</a>
+        </div>
+        <div class="description">Software Engineering Immersive</div>
+      </div>
+      <div class="extra content">
+        <span class="right floated"> 2020-2021 </span>
+        <span>
+          <i class="location arrow icon"></i>
+          Spokane, WA
+        </span>
+      </div>
+    </div>
+    {% comment %} Card 2 {% endcomment %}
+    <div class="card column">
+      <div class="image">
+        <img src="/static/resources/ClaytonWatkins1.jpeg" />
+      </div>
+      <div class="content">
+        <div class="header">Clayton Watkins</div>
+        <div class="meta">
+          <a>Co-Creator</a>
+        </div>
+        <div class="description">Software Engineering Immersive</div>
+      </div>
+      <div class="extra content">
+        <span class="right floated"> 2020-2021 </span>
+
+        <span>
+          <i class="location arrow icon"></i>
+          Redmond, WA
+        </span>
+      </div>
+    </div>
+    {% comment %} CARD 3 {% endcomment %}
+
+    <div class="card column">
+      <div class="image">
+        <img src="/static/resources/QuincyPham.jpeg" />
+      </div>
+      <div class="content">
+        <div class="header">Quincy Pham</div>
+        <div class="meta">
+          <a>Co-Creator</a>
+        </div>
+        <div class="description">Software Engineering Immersive</div>
+      </div>
+      <div class="extra content">
+        <span class="right floated"> 2020-2021 </span>
+
+        <span>
+          <i class="location arrow icon"></i>
+          Seattle, WA
+        </span>
+      </div>
+    </div>
+    {% comment %} Card 4 {% endcomment %}
+    <div class="card column">
+      <div class="image">
+        <img src="/static/resources/GeorgeHu.jpeg" />
+      </div>
+      <div class="content">
+        <div class="header">George Hu</div>
+        <div class="meta">
+          <a>Co-Creator</a>
+        </div>
+        <div class="description">Software Engineering Immersive</div>
+      </div>
+      <div class="extra content">
+        <span class="right floated"> 2020-2021 </span>
+
+        <span>
+          <i class="location arrow icon"></i>
+          Fort Collins, CO
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
