@@ -22,7 +22,8 @@ def city_show(request, city_id):
     city_id = City.objects.get(id=city_id)
     city_all = City.objects.all()
     posts = Post.objects.filter(city_id=city_id)
-    context = {'posts': posts, 'city_id': city_id, 'city_all': city_all}
+    user = User.objects.get(id=request.user.id)
+    context = {'posts': posts, 'city_id': city_id, 'city_all': city_all, 'user': user}
     return render(request, 'cities/city.html', context)
 
 
@@ -128,8 +129,6 @@ def post_create(request, city_id):
 def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     user = User.objects.get(id=post.user_id)
-    value_next = request.POST.get('next')
-    print(value_next)
     # if Profile.objects.filter(user_id=request.user.id):
     # profile = Profile.objects.get(user_id=request.user.id)
 
