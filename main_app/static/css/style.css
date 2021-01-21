@@ -29,6 +29,15 @@ a:active {
   background-color: #05040a;
 }
 
+#navbar, .ui.secondary.pointing.menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 10 !important;
+  background-color: #05040a;
+}
+
 .ui.menu.fixed {
   background-color: #05040a !important;
 }
