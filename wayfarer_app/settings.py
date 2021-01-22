@@ -128,3 +128,13 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/'
 
 django_on_heroku.settings(locals())
+
+#  Email settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'latsin.dev@gmail.com'
+with open('main_app/static/passwords/email.txt') as f:
+    EMAIL_HOST_PASSWORD = f.read().strip()

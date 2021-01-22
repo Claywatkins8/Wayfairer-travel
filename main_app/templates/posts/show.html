@@ -1,21 +1,37 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <div id="container-box" class="ui center aligned stackable grid container">
-    <div id="left-box" class="four wide computer three wide tablet six wide mobile column">
-        <div class="ui segment">
+  <div class="ten wide computer ten wide tablet ten wide mobile column">
+    <div class="ui segment">
+      <div class="header">
+        <h3>{{ post.title }}</h3>
+      </div>
+      <hr />
+      <div class="ui segment description left aligned">
+        <p>{{ post.content }}</p>
+      </div>
+      <div class="right floated author">
+        {% for photo in photos %} {% if post.user_id == photo.user_id %}
+        {{post.user.username}}
+        <img
+          class="ui avatar image"
+          src="{{ photo.url }}"
+          alt="profile photo"
+        />
 
-            <p>Title: {{ post.title }}</p>
-            <p>Author: {{ user.username }}</p>
-            <p>Content: {{ post.content }}</p>
-        </div>
+        {% endif %} {% endfor %}
+      </div>
     </div>
+  </div>
 </div>
 
 {% if auth_user == post.user %}
-    <a href="{% url 'post_edit' post_id=post.id %}" class="ui inverted button">Edit</a>
-    <a href="{% url 'post_delete' post_id=post.id %}" class="ui inverted button">Delete</a>
-    <a href="{% url 'post_delete_city' post_id=post.id city_id=post.city_id %}" class="ui inverted button">Delete and return to City</a>
-{% endif %}
-
-{% endblock %}
+<a href="{% url 'post_edit' post_id=post.id %}" class="ui inverted button"
+  >Edit</a
+>
+<a
+  href="{% url 'post_delete' post_id=post.id city_id=post.city_id %}?next={{next}}"
+  class="ui inverted button"
+  >Delete</a
+>
+{% endif %} {% endblock %}

@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Profile, User, Post, City, Photo
 from .forms import Profile_Form, NewUserForm, Post_Form
+
+from django.conf import settings
+from django.core.mail import send_mail
+
 # AWS IMPORTS
 import boto3
 import uuid
@@ -23,7 +27,9 @@ def city_show(request, city_id):
     city_all = City.objects.all()
     posts = Post.objects.filter(city_id=city_id)
     user = User.objects.get(id=request.user.id)
-    context = {'posts': posts, 'city_id': city_id, 'city_all': city_all, 'user': user}
+    photos = Photo.objects.all()
+    context = {'posts': posts, 'city_id': city_id,
+               'city_all': city_all, 'user': user, 'photos': photos}
     return render(request, 'cities/city.html', context)
 
 
@@ -46,7 +52,14 @@ def home(request):
                     user = signup_form.save()
                     user.profile.current_city = city
                     user.save()
+                    print('made it to login')
                     login(request, user)
+                    subject = 'Welcome to Wayfarer'
+                    message = 'Thank you for registering'
+                    email_from = settings.EMAIL_HOST_USER
+                    recipient_list = [user.email, ]
+                    print('made it to send mail')
+                    send_mail(subject, message, email_from, recipient_list)
                     return redirect('profile/')
                 else:
                     context = {'error': 'Invalid signup, please try again!'}
@@ -130,10 +143,14 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     user = User.objects.get(id=post.user_id)
     auth_user = User.objects.get(id=request.user.id)
+    nextvalue = request.GET.get('next')
+    photos = Photo.objects.all()
+    print(nextvalue)
     # if Profile.objects.filter(user_id=request.user.id):
     # profile = Profile.objects.get(user_id=request.user.id)
 
-    context = {'post': post, 'user': user, 'auth_user': auth_user}
+    context = {'post': post, 'user': user, 'auth_user': auth_user,
+               'next': nextvalue, 'photos': photos}
     return render(request, 'posts/show.html', context)
 
 
@@ -153,21 +170,15 @@ def post_edit(request, post_id):
 
 
 @login_required
-def post_delete(request, post_id):
+def post_delete(request, post_id, city_id):
     item = Post.objects.get(id=post_id)
+    nextvalue = request.GET.get('next')
     if request.user == item.user:
         Post.objects.get(id=post_id).delete()
-        return redirect('profile')
-    else:
-        return redirect('city_show', city_id=city_id)
-
-
-@login_required
-def post_delete_city(request, post_id, city_id):
-    item = Post.objects.get(id=post_id)
-    if request.user == item.user:
-        Post.objects.get(id=post_id).delete()
-        return redirect('city_show', city_id=city_id)
+        if nextvalue != 'None':
+            return redirect(nextvalue)
+        else:
+            return redirect('profile')
     else:
         return redirect('city_show', city_id=city_id)
 
@@ -189,7 +200,9 @@ def add_photo(request, profile_id):
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             # we can assign to cat_id or cat (if you have a cat object)
-            photo = Photo(url=url, profile_id=profile_id)
+
+            photo = Photo(url=url, profile_id=profile_id,
+                          user_id=request.user.id)
             photo.save()
         except:
             print('An error occurred uploading file to S3')
