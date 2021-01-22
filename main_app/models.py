@@ -46,6 +46,7 @@ class Post(models.Model):
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __str__(self):
         return f"User Profile photo: {self.profile_id} @{self.url}"

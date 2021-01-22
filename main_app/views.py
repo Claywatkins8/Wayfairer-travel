@@ -27,8 +27,9 @@ def city_show(request, city_id):
     city_all = City.objects.all()
     posts = Post.objects.filter(city_id=city_id)
     user = User.objects.get(id=request.user.id)
+    photos = Photo.objects.all()
     context = {'posts': posts, 'city_id': city_id,
-               'city_all': city_all, 'user': user}
+               'city_all': city_all, 'user': user, 'photos': photos}
     return render(request, 'cities/city.html', context)
 
 
@@ -197,7 +198,8 @@ def add_photo(request, profile_id):
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             # we can assign to cat_id or cat (if you have a cat object)
-            photo = Photo(url=url, profile_id=profile_id)
+            
+            photo = Photo(url=url, profile_id=profile_id, user_id=request.user.id)
             photo.save()
         except:
             print('An error occurred uploading file to S3')
