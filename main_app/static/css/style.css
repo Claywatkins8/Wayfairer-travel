@@ -207,6 +207,7 @@ a:active {
 
 .topics {
   background-color: #fdfdfd !important;
+  margin-bottom: 0 !important;
 }
 #topics-content {
   margin-bottom: 380px;
