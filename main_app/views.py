@@ -21,7 +21,7 @@ BUCKET = 'wayfarer-app1'
 
 # Define the home views
 
-
+@login_required
 def city_show(request, city_id):
     city_id = City.objects.get(id=city_id)
     city_all = City.objects.all()
