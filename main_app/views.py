@@ -17,9 +17,7 @@ import uuid
 # AWS "Constants"
 S3_BASE_URL = 'https://s3-us-west-2.amazonaws.com/'
 BUCKET = 'wayfarer-app1'
-# Once we have routes that need locking we can put in @login_required
 
-# Define the home views
 
 @login_required
 def city_show(request, city_id):
@@ -28,8 +26,7 @@ def city_show(request, city_id):
     posts = Post.objects.filter(city_id=city_id)
     user = User.objects.get(id=request.user.id)
     photos = Photo.objects.all()
-    context = {'posts': posts, 'city_id': city_id,
-               'city_all': city_all, 'user': user, 'photos': photos}
+    context = {'posts': posts, 'city_id': city_id, 'city_all': city_all, 'user': user, 'photos': photos}
     return render(request, 'cities/city.html', context)
 
 
@@ -52,13 +49,11 @@ def home(request):
                     user = signup_form.save()
                     user.profile.current_city = city
                     user.save()
-                    print('made it to login')
                     login(request, user)
                     subject = 'Welcome to Wayfarer'
                     message = 'Thank you for registering'
                     email_from = settings.EMAIL_HOST_USER
                     recipient_list = [user.email, ]
-                    print('made it to send mail')
                     send_mail(subject, message, email_from, recipient_list)
                     return redirect('profile/')
                 else:
@@ -68,8 +63,7 @@ def home(request):
     profile_form = Profile_Form()
     signup_form = NewUserForm()
     login_form = AuthenticationForm()
-    context = {'signup_form': signup_form,
-               'login_form': login_form, 'profile_form': profile_form}
+    context = {'signup_form': signup_form, 'login_form': login_form, 'profile_form': profile_form}
     return render(request, 'home.html', context)
 
 
@@ -84,7 +78,6 @@ def profile(request):
         if profile_form.is_valid():
             profile = profile_form.save(commit=False)
             profile.user = request.user
-            print(profile_form)
             profile.save()
             return redirect('profile')
 
@@ -95,8 +88,7 @@ def profile(request):
         profile = ""
     profile_form = Profile_Form()
     posts = Post.objects.filter(user=request.user)
-    context = {'profile': profile, 'profile_form': profile_form,
-               'user': user, 'posts': posts}
+    context = {'profile': profile, 'profile_form': profile_form, 'user': user, 'posts': posts}
     return render(request, 'profile.html', context)
 
 
@@ -116,8 +108,7 @@ def profile_edit(request):
 
     profile_form = Profile_Form(instance=profile)
     user_form = NewUserForm(instance=user)
-    context = {'profile_form': profile_form,
-               'user_form': user_form, 'user': user, 'profile': profile}
+    context = {'profile_form': profile_form, 'user_form': user_form, 'user': user, 'profile': profile}
     return render(request, 'profiles/edit.html', context)
 
 
@@ -125,7 +116,6 @@ def profile_edit(request):
 def post_create(request, city_id):
     if request.method == 'POST':
         post_form = Post_Form(request.POST)
-        print(post_form)
         if post_form.is_valid():
             new_post = post_form.save(commit=False)
             new_post.user = request.user
@@ -145,12 +135,7 @@ def post_show(request, post_id):
     auth_user = User.objects.get(id=request.user.id)
     nextvalue = request.GET.get('next')
     photos = Photo.objects.all()
-    print(nextvalue)
-    # if Profile.objects.filter(user_id=request.user.id):
-    # profile = Profile.objects.get(user_id=request.user.id)
-
-    context = {'post': post, 'user': user, 'auth_user': auth_user,
-               'next': nextvalue, 'photos': photos}
+    context = {'post': post, 'user': user, 'auth_user': auth_user, 'next': nextvalue, 'photos': photos}
     return render(request, 'posts/show.html', context)
 
 
@@ -199,10 +184,8 @@ def add_photo(request, profile_id):
             s3.upload_fileobj(photo_file, BUCKET, key)
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
-            # we can assign to cat_id or cat (if you have a cat object)
 
-            photo = Photo(url=url, profile_id=profile_id,
-                          user_id=request.user.id)
+            photo = Photo(url=url, profile_id=profile_id, user_id=request.user.id)
             photo.save()
         except:
             print('An error occurred uploading file to S3')
@@ -214,18 +197,3 @@ def photo_delete(request, photo_id):
     Photo.objects.get(id=photo_id).delete()
     return redirect('profile')
 
-# REVIEW: Do not need page anymore? in modal?
-# def signup(request):
-#     error_message = ''
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             # We are going to return redirect to home but will change this later
-#             return redirect('')
-#         else:
-#             error_message = 'Invalid signup, please try again!'
-#     form = UserCreationForm()
-#     context = {'form':form, 'error_message': error_message}
-#     return render(request, 'registration/signup.html', context)
