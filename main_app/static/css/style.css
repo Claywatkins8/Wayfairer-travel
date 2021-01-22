@@ -15,14 +15,15 @@ a:active {
   color: inherit;
 }
 
-.swiper-button-prev:after, .swiper-container-rtl .swiper-button-next:after, 
-.swiper-button-next:after, .swiper-container-rtl .swiper-button-prev:after
-{
-  color: #C62F2C;
+.swiper-button-prev:after,
+.swiper-container-rtl .swiper-button-next:after,
+.swiper-button-next:after,
+.swiper-container-rtl .swiper-button-prev:after {
+  color: #c62f2c;
 }
 
 .swiper-pagination-bullets .swiper-pagination-bullet {
-  background-color: #C62F2C;
+  background-color: #c62f2c;
 }
 
 #container-box {

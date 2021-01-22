@@ -57,7 +57,7 @@ def home(request):
                     subject = 'Welcome to Wayfarer'
                     message = 'Thank you for registering'
                     email_from = settings.EMAIL_HOST_USER
-                    recipient_list = [user.email,]
+                    recipient_list = [user.email, ]
                     print('made it to send mail')
                     send_mail(subject, message, email_from, recipient_list)
                     return redirect('profile/')
@@ -144,11 +144,13 @@ def post_show(request, post_id):
     user = User.objects.get(id=post.user_id)
     auth_user = User.objects.get(id=request.user.id)
     nextvalue = request.GET.get('next')
+    photos = Photo.objects.all()
     print(nextvalue)
     # if Profile.objects.filter(user_id=request.user.id):
     # profile = Profile.objects.get(user_id=request.user.id)
 
-    context = {'post': post, 'user': user, 'auth_user': auth_user, 'next': nextvalue}
+    context = {'post': post, 'user': user, 'auth_user': auth_user,
+               'next': nextvalue, 'photos': photos}
     return render(request, 'posts/show.html', context)
 
 
@@ -198,8 +200,9 @@ def add_photo(request, profile_id):
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             # we can assign to cat_id or cat (if you have a cat object)
-            
-            photo = Photo(url=url, profile_id=profile_id, user_id=request.user.id)
+
+            photo = Photo(url=url, profile_id=profile_id,
+                          user_id=request.user.id)
             photo.save()
         except:
             print('An error occurred uploading file to S3')
