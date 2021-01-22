@@ -6,12 +6,20 @@
       <div class="header">
         <h3>{{ post.title }}</h3>
       </div>
-      <div class="meta">
-        <p>Created By: {{ user.username }}</p>
-      </div>
       <hr />
       <div class="ui segment description left aligned">
         <p>{{ post.content }}</p>
+      </div>
+      <div class="right floated author">
+        {% for photo in photos %} {% if post.user_id == photo.user_id %}
+        {{post.user.username}}
+        <img
+          class="ui avatar image"
+          src="{{ photo.url }}"
+          alt="profile photo"
+        />
+
+        {% endif %} {% endfor %}
       </div>
     </div>
   </div>
