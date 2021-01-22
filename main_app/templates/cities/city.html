@@ -64,7 +64,13 @@
             </a>
           </div>
           <div class="description">
-            <p>{{ post.content }}</p>
+            {% for photo in photos %}
+              {% if post.user_id == photo.user_id %}
+                <img src="{{ photo.url }}" alt="profile photo" width="150px">
+              {% endif %}
+            {% endfor %}            
+            <p> Username: {{post.user.username}} </p>
+            <p> {{ post.content }}</p>
           </div>
         </div>
       </div>
