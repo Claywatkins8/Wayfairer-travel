@@ -200,3 +200,10 @@ a:active {
 #topics-content {
   margin-bottom: 380px;
 }
+
+/* box shadow */
+.shadow {
+  -webkit-box-shadow: 3px 3px 11px 0px rgba(56, 50, 50, 0.45);
+  -moz-box-shadow: 3px 3px 11px 0px rgba(56, 50, 50, 0.45);
+  box-shadow: 4px 3px 11px 0px rgba(59, 59, 59, 0.75) !important;
+}
