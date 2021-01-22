@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% comment %} <form action="{% url 'post_edit' post.id %}" method="POST">
-    {% csrf_token %}
-    {{ post_form.as_p }}  
-    <input type="submit" value="Edit Post">
-</form> {% endcomment %}
 
 <div id="container-box" class="ui center aligned stackable grid container">
     <form method="POST" action="{% url 'post_edit' post.id %}">
